@@ -17,7 +17,7 @@ const statusColor = computed(() => {
 
 onMounted(async () => {
   try {
-    const res = await fetch('http://localhost:3001/api/db-status')
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/db-status`)
     const data = await res.json()
     status.value = data.status
   } catch {
