@@ -1,46 +1,31 @@
-<script setup>
-import { ref, computed, onMounted } from 'vue'
-
-const status = ref('loading')
-
-const statusText = computed(() => {
-  if (status.value === 'connected') return '已连接'
-  if (status.value === 'error') return '连接失败'
-  return '检测中...'
-})
-
-const statusColor = computed(() => {
-  if (status.value === 'connected') return 'green'
-  if (status.value === 'error') return 'red'
-  return 'gray'
-})
-
-onMounted(async () => {
-  try {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/db-status`)
-    const data = await res.json()
-    status.value = data.status
-  } catch {
-    status.value = 'error'
-  }
-})
-</script>
-
 <template>
-  <div style="padding: 40px; max-width: 500px; margin: auto;">
-    <h2>数据库连接状态检测</h2>
-    <p>
-      当前数据库连接状态：
-      <span :style="{ color: statusColor }">{{ statusText }}</span>
-    </p>
-  </div>
+  <router-view />
 </template>
 
-<style scoped>
-h2 {
-  margin-bottom: 20px;
+<script setup>
+</script>
+
+<style>
+html, body, #app {
+  width: 100%;
+  min-height: 100vh;
+
+  overflow-x: hidden !important;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-p {
-  font-size: 18px;
+body {
+  position: relative;
+}
+#app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body, #app, .dashboard-grid {
+  font-family: 'HarmonyOS_Sans_TC_Medium', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
 }
 </style>
