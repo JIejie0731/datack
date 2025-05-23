@@ -281,7 +281,7 @@ function updateTime() {
 
 async function fetchDbStatus() {
   try {
-    const res = await axios.get('/api/db-status')
+    const res = await axios.get(`${import.meta.env.VITE_API_BASE}/db-status`)
     dbConnected.value = res.data.status === 'connected'
   } catch (e) {
     dbConnected.value = false
