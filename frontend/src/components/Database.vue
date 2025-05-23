@@ -72,6 +72,8 @@
 </template>
 
 <script setup>
+console.log('VITE_API_BASE:', import.meta.env.VITE_API_BASE)
+
 import { useRouter, useRoute } from 'vue-router'
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import axios from 'axios'
