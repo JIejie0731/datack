@@ -110,9 +110,11 @@ const dbConnected = ref(false)
 const showDbTooltip = ref(false)
 let dbTimer = null
 
+const apiBase = import.meta.env.VITE_API_BASE
+
 async function fetchDbStatus() {
   try {
-    const res = await axios.get('/api/db-status')
+    const res = await axios.get(`${apiBase}/db-status`)
     dbConnected.value = res.data.status === 'connected'
   } catch (e) {
     dbConnected.value = false
@@ -141,7 +143,7 @@ async function onQuery() {
   errorMsg.value = ''
   loading.value = true
   try {
-    const res = await axios.post('/api/sql-query', {
+    const res = await axios.post(`${apiBase}/sql-query`, {
       sql: sql.value,
       page: currentPage.value,
       pageSize: pageSize.value
@@ -351,8 +353,6 @@ function onExport() {
   text-align: center !important;
 }
 :deep(.monaco-editor .monaco-editor-background) {
-
-
   border-left: none !important;
   background: #fff;
 }
