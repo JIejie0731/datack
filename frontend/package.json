@@ -11,8 +11,11 @@
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
     "axios": "^1.9.0",
+    "monaco-editor": "^0.52.2",
+    "monaco-editor-vue3": "^0.1.10",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",

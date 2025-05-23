@@ -1,3 +1,6 @@
+import '@arco-design/web-vue/dist/arco.css'
+import ArcoVue from '@arco-design/web-vue'
+import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import './assets/fonts.css'
 import './assets/main.css'
 
@@ -5,4 +8,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+app.use(router)
+app.use(ArcoVue)
+app.use(ArcoVueIcon)
+app.mount('#app')

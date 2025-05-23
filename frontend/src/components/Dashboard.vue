@@ -26,6 +26,15 @@
             {{ dbConnected ? '数据库连接成功' : '数据库连接失败' }}
           </span>
         </span>
+        <img
+          :src="exitIcon"
+          alt="退出"
+          class="exit-icon"
+          @click="handleExit"
+          @mouseenter="showExitTooltip = true"
+          @mouseleave="showExitTooltip = false"
+        />
+        <span v-if="showExitTooltip" class="exit-tooltip">退出</span>
       </span>
     </div>
     <div class="grid-left" card-id="2" card-name="左侧业务监控">
@@ -146,33 +155,35 @@
             仓储库存监控
           </div>
           <div class="card3-metrics-row">
-            <div class="card3-metric-title">入库作业量(箱)</div>
-            <div class="card3-metric-title">出库作业量(箱)</div>
-            <div class="card3-metric-title">库存箱数(箱)</div>
-          </div>
-          <div class="card3-metrics-row">
-            <div class="card3-metric-value">{{ stockMetrics[0].value }}</div>
-            <div class="card3-metric-value">{{ stockMetrics[1].value }}</div>
-            <div class="card3-metric-value">{{ stockMetrics[2].value }}</div>
-          </div>
-          <div class="card3-metrics-row">
-            <div class="card3-metric-sub">
-              环比上月
-              <span :class="stockMetrics[0].trend > 0 ? 'trend-up-red' : 'trend-down'">
-                {{ stockMetrics[0].trend }}%<span class="arrow-up">▲</span>
-              </span>
+            <div class="card3-metric-col">
+              <div class="card3-metric-title">入库作业量</div>
+              <div class="card3-metric-value">{{ stockMetrics[0].value }}</div>
+              <div class="card3-metric-sub">
+                环比上月
+                <span class="card3-metric-sub-row" :class="stockMetrics[0].trend > 0 ? 'trend-up-red' : 'trend-down'">
+                  {{ stockMetrics[0].trend }}% <span class="arrow-up">▲</span>
+                </span>
+              </div>
             </div>
-            <div class="card3-metric-sub">
-              环比上月
-              <span :class="stockMetrics[1].trend > 0 ? 'trend-up-red' : 'trend-down'">
-                {{ stockMetrics[1].trend }}%<span class="arrow-up">▲</span>
-              </span>
+            <div class="card3-metric-col">
+              <div class="card3-metric-title">出库作业量</div>
+              <div class="card3-metric-value">{{ stockMetrics[1].value }}</div>
+              <div class="card3-metric-sub">
+                环比上月
+                <span class="card3-metric-sub-row" :class="stockMetrics[1].trend > 0 ? 'trend-up-red' : 'trend-down'">
+                  {{ stockMetrics[1].trend }}% <span class="arrow-up">▲</span>
+                </span>
+              </div>
             </div>
-            <div class="card3-metric-sub">
-              环比上月
-              <span :class="stockMetrics[2].trend > 0 ? 'trend-up-red' : 'trend-down'">
-                {{ stockMetrics[2].trend }}%<span class="arrow-up">▲</span>
-              </span>
+            <div class="card3-metric-col">
+              <div class="card3-metric-title">库存箱数</div>
+              <div class="card3-metric-value">{{ stockMetrics[2].value }}</div>
+              <div class="card3-metric-sub">
+                环比上月
+                <span class="card3-metric-sub-row" :class="stockMetrics[2].trend > 0 ? 'trend-up-red' : 'trend-down'">
+                  {{ stockMetrics[2].trend }}% <span class="arrow-up">▲</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -246,12 +257,16 @@ import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { DatabaseSuccess, DatabaseAlert } from '@icon-park/vue-next'
 import axios from 'axios'
 import bgImg from '@/assets/背景图.png'
+import { useRouter } from 'vue-router'
+import exitIcon from '@/assets/退出.png'
 
 const nowTime = ref('')
 const dbConnected = ref(false)
 const showTooltip = ref(false)
+const showExitTooltip = ref(false)
 let timer = null
 let dbTimer = null
+const router = useRouter()
 
 function updateTime() {
   const now = new Date()
@@ -338,6 +353,10 @@ function flipToNextPage() {
       flipState.value = ''
     }, 400)
   }, 400)
+}
+
+function handleExit() {
+  router.push('/portfolio')
 }
 
 onMounted(() => {
@@ -785,10 +804,23 @@ onUnmounted(() => {
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
+  gap: 0;
 }
-.card3-metric-title, .card3-metric-value, .card3-metric-sub {
-  flex: 1;
+.card3-metric-col {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+}
+.card3-metric-title,
+.card3-metric-value,
+.card3-metric-sub {
+  width: 100%;
+  text-align: center;
+  word-break: break-all;
 }
 .card3-metric-title {
   font-size: 0.85rem;
@@ -804,8 +836,17 @@ onUnmounted(() => {
   letter-spacing: 2px;
 }
 .card3-metric-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 0.82rem;
   color: #b0bec5;
+}
+.card3-metric-sub-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 2px;
 }
 .trend-up-red {
   color: #ff4d4f;
@@ -912,5 +953,33 @@ onUnmounted(() => {
 @keyframes flipIn {
   0% { transform: rotateX(-90deg); opacity: 0; }
   100% { transform: rotateX(0); opacity: 1; }
+}
+
+.exit-icon {
+  width: 28px;
+  height: 28px;
+  margin-left: 18px;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: filter 0.2s;
+  filter: brightness(0.95) grayscale(0.2);
+}
+.exit-icon:hover {
+  filter: brightness(1.2) grayscale(0);
+}
+.exit-tooltip {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background: #222;
+  color: #fff;
+  padding: 4px 14px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: 0 2px 8px #0003;
+  pointer-events: none;
+  margin-right: 8px;
 }
 </style>
