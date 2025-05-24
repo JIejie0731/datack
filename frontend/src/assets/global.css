@@ -1,0 +1,15 @@
+/* 全局覆盖 Arco Menu 横线和文字为黑色 */
+.arco-menu-horizontal .arco-menu-item::after,
+.arco-menu-horizontal .arco-menu-selected::after,
+.arco-menu-horizontal .arco-menu-item.arco-menu-selected::after {
+  background: #222 !important;
+  border-color: #222 !important;
+}
+.arco-menu-horizontal .arco-menu-item,
+.arco-menu-horizontal .arco-menu-item.arco-menu-selected,
+.arco-menu-horizontal .arco-menu-selected .arco-menu-item-content {
+  color: #222 !important;
+}
+.arco-menu-selected-label {
+  background: #222 !important;
+} 
