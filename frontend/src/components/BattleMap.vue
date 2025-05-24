@@ -226,16 +226,17 @@ function setActiveBtn(name) {
     min-width: 0;
   }
   .user-role {
+    width: 90px;           /* 固定宽度，可根据实际内容微调 */
+  min-width: 90px;
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 8px;
   color: #bdbdbd;
   display: flex;
   align-items: center;
-  min-width: 0;
-  white-space: nowrap;
   text-align: left;
-  width: 80px;       /* 固定宽度，保证状态切换时宽度不变 */
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
   .user-dot {
     width: 8px;
