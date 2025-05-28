@@ -1,7 +1,7 @@
 {
-  "name": "frontend",
-  "private": true,
+  "name": "vue-project",
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,21 +9,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@antv/g2plot": "^2.4.33",
     "@arco-design/web-vue": "^2.57.0",
+    "@icon-park/vue-next": "^1.4.2",
     "axios": "^1.9.0",
     "echarts": "^5.6.0",
-    "html2canvas": "^1.4.1",
+    "element-plus": "^2.9.11",
     "jspdf": "^3.0.1",
     "monaco-editor": "^0.52.2",
     "monaco-editor-vue3": "^0.1.10",
-    "vite": "5.4.19",
-    "vue-router": "^4.5.1"
+    "vue": "^3.5.13",
+    "vue-echarts": "^7.0.3",
+    "vue-router": "^4.5.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.17",
-    "vite-plugin-vue-devtools": "^7.7.6"
+    "vite": "^6.2.4",
+    "vite-plugin-vue-devtools": "^7.7.2"
   }
 }
