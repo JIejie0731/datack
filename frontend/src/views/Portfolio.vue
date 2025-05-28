@@ -25,7 +25,6 @@
         </div>
       </div>
       <div class="content-area">
-        <!-- 内容区域 -->
         <div class="project-card-list">
           <div class="project-card" @click="goLogistics">
             <div class="project-background"></div>
@@ -63,6 +62,7 @@
   <script setup>
   // 引入 Header 组件
   import Header from '../components/Header.vue'
+  import BaseCard from '../components/BaseCard.vue'
   
   // 引入 useRouter
   import { useRouter } from 'vue-router'
@@ -213,7 +213,7 @@
     transform: translateX(-56px);
   }
   
-  /* 从Home.vue复制的作品集卡片样式 */
+  /* 作品集卡片样式（与首页一致） */
   .project-card-list {
     display: flex;
     gap: 24px;
@@ -271,21 +271,17 @@
     font-size: 0.98rem;
     margin-top: 4px;
   }
-  
-  /* 背景颜色代替图片 */
   .project-background {
     width: 100%;
     height: 14.375rem; /* 230px 转换为 rem */
     background-image: url('../assets/物流封面.png'); /* 设置背景图片 */
-    background-size: cover; /* 确保图片覆盖整个区域 */
-    background-position: center; /* 确保图片居中 */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* 添加阴影，模拟发光效果 */
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   }
-  
-  /* 人力资源分析大屏卡片背景图 */
   .hr-background {
-    background-image: url('../assets/hr封面.png'); /* 设置人力资源封面图片 */
-    background-size: cover; /* 确保图片覆盖整个区域 */
-    background-position: center; /* 确保图片居中 */
+    background-image: url('../assets/hr封面.png');
+    background-size: cover;
+    background-position: center;
   }
   </style> 

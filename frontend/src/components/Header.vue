@@ -34,7 +34,13 @@
         <button
           class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-300 focus:outline-none"
           :aria-label="item.label"
-          @click="idx === 0 ? router.push('/livedata') : (idx === 1 ? router.push('/database') : (idx === 2 ? router.push('/blog') : (idx === 3 ? router.push('/test') : null)))"
+          @click="
+            idx === 0 ? router.push('/toolbox') :
+            idx === 1 ? router.push('/blog') :
+            idx === 2 ? router.push('/livedata') :
+            idx === 3 ? router.push('/database') :
+            idx === 4 ? router.push('/test') : null
+          "
         >
           <img :src="item.icon" class="navbar-icon-img text-xl group-hover/item:scale-125 transition-transform duration-300" />
         </button>
@@ -67,6 +73,7 @@ import dataIcon from '../assets/大数据系统.png'
 import dbIcon from '../assets/服务器_数据库_jurassic.png'
 import blogIcon from '../assets/博客.png'
 import testIcon from '../assets/测试.png'
+import toolboxIcon from '../assets/工具箱.png'
 
 const router = useRouter()
 const isAnyHovered = ref(false)
@@ -78,9 +85,10 @@ const navbarLeft = [
   { icon: projectIcon, label: '作品集' },
 ];
 const navbarRight = [
+  { icon: toolboxIcon, label: '工具箱' },
+  { icon: blogIcon, label: '博客' },
   { icon: dataIcon, label: '数据求索' },
   { icon: dbIcon, label: '数据库' },
-  { icon: blogIcon, label: '博客' },
   { icon: testIcon, label: '测试' },
 ];
 

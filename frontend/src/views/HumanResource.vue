@@ -45,10 +45,31 @@
 
       <div class="hr-section section-2">
           <div class="card-list">
-              <div class="card-item">卡片1</div>
-              <div class="card-item">卡片2</div>
-              <div class="card-item">卡片3</div>
-              <div class="card-item">卡片4</div>
+              <div v-for="(item, index) in 4" :key="index" class="card-item card1-flex">
+                <div class="card1-indicator">
+                  <div class="indicator-content">
+                    <span class="indicator-icon">
+                      <template v-if="index === 1">
+                        <svg t="1748451155797" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="38088" width="40" height="40"><path d="M896 962.56h-768c-51.2 0-93.866667-42.666667-93.866667-93.866667v-614.4c0-51.2 42.666667-93.866667 93.866667-93.866666h310.613333c13.653333 0 25.6 11.946667 25.6 25.6s-11.946667 25.6-25.6 25.6H128c-23.893333 0-42.666667 18.773333-42.666667 42.666666v614.4c0 23.893333 18.773333 42.666667 42.666667 42.666667h768c23.893333 0 42.666667-18.773333 42.666667-42.666667v-614.4c0-23.893333-18.773333-42.666667-42.666667-42.666666H585.386667c-13.653333 0-25.6-11.946667-25.6-25.6s11.946667-25.6 25.6-25.6h310.613333c51.2 0 93.866667 42.666667 93.866667 93.866666v614.4c0 52.906667-42.666667 93.866667-93.866667 93.866667z" fill="#333333" p-id="38089"></path><path d="M348.16 535.893333c-54.613333 0-97.28-44.373333-97.28-98.986666 0-54.613333 44.373333-97.28 97.28-97.28s97.28 44.373333 97.28 97.28c1.706667 56.32-42.666667 98.986667-97.28 98.986666z m0-145.066666c-25.6 0-46.08 20.48-46.08 46.08 0 25.6 20.48 47.786667 46.08 47.786666s46.08-20.48 46.08-47.786666c1.706667-23.893333-18.773333-46.08-46.08-46.08zM512 783.36H186.026667c-13.653333 0-25.6-11.946667-25.6-25.6 0-104.106667 85.333333-189.44 189.44-189.44s189.44 85.333333 189.44 189.44c-1.706667 15.36-13.653333 25.6-27.306667 25.6z m-298.666667-51.2h269.653334c-11.946667-63.146667-68.266667-112.64-134.826667-112.64s-122.88 49.493333-134.826667 112.64zM788.48 663.893333c-6.826667 0-13.653333-1.706667-18.773333-6.826666l-151.893334-151.893334c-10.24-10.24-10.24-25.6 0-35.84s25.6-10.24 35.84 0l151.893334 151.893334c10.24 10.24 10.24 25.6 0 35.84-5.12 3.413333-10.24 6.826667-17.066667 6.826666z" fill="#333333" p-id="38090"></path><path d="M636.586667 663.893333c-6.826667 0-13.653333-1.706667-18.773334-6.826666-10.24-10.24-10.24-25.6 0-35.84l151.893334-151.893334c10.24-10.24 25.6-10.24 35.84 0s10.24 25.6 0 35.84l-151.893334 151.893334c-3.413333 3.413333-10.24 6.826667-17.066666 6.826666z" fill="#333333" p-id="38091"></path><path d="M512 317.44c-54.613333 0-98.986667-44.373333-98.986667-98.986667V160.426667c0-54.613333 44.373333-98.986667 98.986667-98.986667s98.986667 44.373333 98.986667 98.986667v58.026666c0 54.613333-44.373333 98.986667-98.986667 98.986667z m0-204.8c-25.6 0-47.786667 22.186667-47.786667 47.786667v58.026666c0 25.6 22.186667 47.786667 47.786667 47.786667s47.786667-22.186667 47.786667-47.786667V160.426667c0-27.306667-22.186667-47.786667-47.786667-47.786667z" fill="#333333" p-id="38092"></path></svg>
+                      </template>
+                      <template v-else-if="index === 2">
+                        <svg t="1748451785961" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="63303" width="40" height="40"><path d="M119.13216 820.096V263.36256a13.2864 13.2864 0 0 1 13.27616-13.26592h276.736c6.8864 47.34976 47.744 83.85024 96.9728 83.85024s90.10176-36.49536 96.98816-83.85024h285.23008a13.2864 13.2864 0 0 1 13.26592 13.26592v470.45632h56.00768V263.36256c0-38.19008-31.06816-69.2736-69.2736-69.2736h-284.20096V123.91424a27.99616 27.99616 0 0 0-28.0064-28.0064H436.1216a28.0064 28.0064 0 0 0-28.0064 28.0064v70.17472H132.40832c-38.20544 0-69.28384 31.08352-69.28384 69.2736v556.73856c0 38.19008 31.08352 69.2736 69.28384 69.2736h450.66752v-56.00768H132.40832a13.29664 13.29664 0 0 1-13.27616-13.27104zM464.128 151.91552h83.99872V235.9296c0 23.16288-18.8416 42.00448-42.00448 42.00448s-41.99424-18.8416-41.99424-42.00448V151.91552z" fill="#3E3A39" p-id="63304"></path><path d="M559.03744 637.57824l-103.20896-51.57888 26.69056-38.8352a28.02688 28.02688 0 0 0 4.92032-15.86176V449.32608c0-60.86144-48.64-108.544-110.7456-108.544-62.09536 0-110.7456 47.68256-110.7456 108.544v81.97632c0 5.81632 1.80736 11.48928 5.18144 16.2304l27.19744 38.2464-107.73504 51.58912a27.98592 27.98592 0 0 0-15.90272 25.25696v52.0448a28.0064 28.0064 0 0 0 28.0064 28.0064h343.81824a28.00128 28.00128 0 0 0 28.0064-28.0064v-52.0448a28.0064 28.0064 0 0 0-15.48288-25.04704z m-40.52992 49.09056H230.69696v-6.4l121.83552-58.34752a27.97568 27.97568 0 0 0 15.01184-18.24256 28.04224 28.04224 0 0 0-4.29568-23.2448l-41.2928-58.07616V449.32608c0-29.45536 24.0384-52.53632 54.73792-52.53632s54.73792 23.08096 54.73792 52.53632v73.27744l-39.99744 58.19904a28.04224 28.04224 0 0 0-4.03456 22.8608 27.97568 27.97568 0 0 0 14.592 18.048l116.51584 58.22464v6.7328zM737.15712 592.2048c15.47776 0 28.0064-12.53888 28.0064-28.0064s-12.52352-28.0064-28.0064-28.0064H623.36c-15.47776 0-28.0064 12.53888-28.0064 28.0064s12.52352 28.0064 28.0064 28.0064h113.79712zM623.36 417.47968c-15.47776 0-28.0064 12.53888-28.0064 28.0064s12.52352 28.0064 28.0064 28.0064h178.19648a28.00128 28.00128 0 0 0 28.0064-28.0064 27.99616 27.99616 0 0 0-28.0064-28.0064H623.36z" fill="#3E3A39" p-id="63305"></path><path d="M683.40736 830.60224m-58.76736 0a58.76736 58.76736 0 1 0 117.53472 0 58.76736 58.76736 0 1 0-117.53472 0Z" fill="#3E3A39" p-id="63306"></path><path d="M820.51072 830.60224m-58.76736 0a58.76736 58.76736 0 1 0 117.53472 0 58.76736 58.76736 0 1 0-117.53472 0Z" fill="#3E3A39" p-id="63307"></path><path d="M957.60896 830.60224m-58.76736 0a58.76736 58.76736 0 1 0 117.53472 0 58.76736 58.76736 0 1 0-117.53472 0Z" fill="#3E3A39" p-id="63308"></path></svg>
+                      </template>
+                      <template v-else-if="index === 3">
+                        <svg t="1748452547151" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="71215" width="40" height="40"><path d="M502.4 313.6c35.2 0 67.2-28.8 67.2-67.2V144h-131.2v105.6c-3.2 35.2 25.6 64 64 64z" p-id="71216" fill="#2c2c2c"></path><path d="M889.6 240h-275.2v6.4c0 64-51.2 115.2-115.2 115.2S384 313.6 384 249.6v-9.6H134.4c-22.4 0-41.6 19.2-41.6 41.6v556.8c0 22.4 19.2 41.6 41.6 41.6h755.2c22.4 0 41.6-19.2 41.6-41.6V281.6c0-22.4-19.2-41.6-41.6-41.6zM524.8 732.8H179.2v-51.2l137.6-67.2-44.8-64v-83.2c0-44.8 38.4-80 83.2-80 44.8 0 83.2 35.2 83.2 80v83.2l-44.8 64 131.2 67.2v51.2z m105.6-300.8H800c12.8 0 25.6 12.8 25.6 25.6s-12.8 25.6-25.6 25.6h-166.4c-12.8 0-25.6-12.8-25.6-25.6-3.2-16 9.6-25.6 22.4-25.6z m0 112H736c12.8 0 25.6 12.8 25.6 25.6s-12.8 25.6-25.6 25.6h-105.6c-12.8 0-25.6-12.8-25.6-25.6 0-16 12.8-25.6 25.6-25.6z m169.6 153.6h-166.4c-12.8 0-25.6-12.8-25.6-25.6s12.8-25.6 25.6-25.6H800c12.8 0 25.6 12.8 25.6 25.6s-12.8 25.6-25.6 25.6z" p-id="71217" fill="#2c2c2c"></path></svg>
+                      </template>
+                      <template v-else>
+                        <svg t="1748449437076" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="34389" width="40" height="40"><path d="M966.464 619.712a26.176 26.176 0 0 1-26.176-26.176V273.184c0-23.264-18.912-42.144-42.144-42.144H589.12a26.176 26.176 0 1 1 0-52.32h309.024a94.624 94.624 0 0 1 94.528 94.496v320.352a26.176 26.176 0 0 1-26.208 26.144zM587.712 923.072H127.2a94.624 94.624 0 0 1-94.528-94.56V273.184A94.624 94.624 0 0 1 127.2 178.688h313.184a26.144 26.144 0 1 1 0 52.32h-313.184c-23.264 0-42.176 18.912-42.176 42.144V828.48a42.24 42.24 0 0 0 42.176 42.208h460.544a26.144 26.144 0 1 1-0.032 52.384z" fill="#231815" p-id="34390"></path><path d="M512.64 341.344a98.016 98.016 0 0 1-97.92-97.92v-128.672c0-14.432 11.744-26.176 26.176-26.176h143.456c14.464 0 26.176 11.744 26.176 26.176v128.544a97.984 97.984 0 0 1-97.888 98.048zM467.072 140.96v102.336c0 25.216 20.448 45.696 45.568 45.696 25.12 0 45.536-20.48 45.536-45.568V140.96H467.072zM837.984 479.872h-201.856a26.176 26.176 0 0 1 0-52.384h201.856a26.208 26.208 0 0 1 0 52.384zM758.944 606.976h-122.816a26.176 26.176 0 0 1 0-52.352h122.816a26.144 26.144 0 0 1 0 52.352zM789.888 938.016a25.696 25.696 0 0 1-15.904-5.472l-132.384-101.376a26.176 26.176 0 1 1 31.84-41.568l113.024 86.592 158.944-179.264a26.176 26.176 0 1 1 39.2 34.72l-175.168 197.504a25.92 25.92 0 0 1-19.552 8.864zM458.976 807.68a26.144 26.144 0 0 1-26.176-26.144v-103.2c0-18.048-14.688-32.704-32.736-32.704H295.52c-18.016 0-32.704 14.656-32.704 32.704v103.2a26.176 26.176 0 0 1-52.352 0v-103.2a85.152 85.152 0 0 1 85.088-85.056h104.512a85.184 85.184 0 0 1 85.12 85.056v103.2a26.24 26.24 0 0 1-26.208 26.144zM347.776 551.744c-56.032 0-101.664-45.632-101.664-101.696s45.6-101.696 101.664-101.696 101.664 45.632 101.664 101.696-45.632 101.696-101.664 101.696z m0-151.008a49.344 49.344 0 1 0 0.032 98.56 49.344 49.344 0 0 0-0.032-98.56z" fill="#231815" p-id="34391"></path></svg>
+                      </template>
+                    </span>
+                    <span class="indicator-number">{{ index === 1 ? '200人' : (index === 2 ? '198人' : (index === 3 ? '134人' : '500人')) }}</span>
+                    <span class="indicator-label">{{ index === 1 ? '离职人数' : (index === 2 ? '入职人数' : (index === 3 ? '转正人数' : '在职人数')) }}</span>
+                  </div>
+                </div>
+                <div class="card1-chart">
+                  <div :ref="el => cardBarRefs[index] = el" class="card1-bar-chart" style="width: 100%; height: 100%;"></div>
+                </div>
+              </div>
           </div>
       </div>
 
@@ -56,70 +77,56 @@
           <div class="section3-card-list">
               <div class="section3-card">
                   <div class="cardA-inner">
-
-
                       <div class="cardA-row1">
-                          <div class="a1-title">
-                              <h3>月度趋势</h3>
-                          </div>
-
-                          <div ref="chartA1Ref" class="chart-container"
-                              style="width: 100%; height: calc(100% - 40px);"></div>
+                          <BaseCard name="月度趋势" cardId="monthly-trend" v-model:zoom="trendZoom">
+                            <div class="chart-container" :style="trendZoom ? {height: '100%'} : {height: '100%'}">
+                              <div ref="chartA1Ref" style="width: 100%; height: 100%;"></div>
+                            </div>
+                          </BaseCard>
                       </div>
-
-
-
-
 
                       <div class="cardA-row2">
                           <div class="cardA-row2-item">
-                              <div class="a2-title">
-                                  <h3>年龄分布</h3>
-                              </div>
-                              <div class="a2-chart">
-                                  <div ref="agePieRef" style="width: 100%; height: 260px;"></div>
-                              </div>
-
-
-
+                              <BaseCard name="年龄分布" cardId="age-distribution" v-model:zoom="ageZoom">
+                                <div class="a2-chart" :style="ageZoom ? {height: '100%'} : {height: 'calc(100% )'}">
+                                  <div ref="agePieRef" :style="ageZoom ? 'width:100%;height:100%;' : 'width:100%;height:260px;'" ></div>
+                                </div>
+                              </BaseCard>
                           </div>
 
-
-
-
-
                           <div class="cardA-row2-item">
-
-
-                              <div class="a3-title">
-                                  <h3>职级分布</h3>
-                              </div>
-                              <div class="a3-chart">
+                              <BaseCard name="职级分布" cardId="level-distribution" v-model:zoom="levelZoom">
+                                <div class="a3-chart" :style="levelZoom ? {height: '100%'} : {height: '100%'}">
                                   <div ref="levelBarRef" style="width: 100%; height: 100%;"></div>
-
                                   <Modal
-v-model:visible="showLevelModal"
-:title="modalInfo.level + '职级人员信息'"
-:columns="tableColumns"
-:data="tableData"
-:page-size="15"
-/>
-
-
-                              </div>
-
+                                    v-model:visible="showLevelModal"
+                                    :title="modalInfo.level + '职级人员信息'"
+                                    :columns="tableColumns"
+                                    :data="tableData"
+                                    :page-size="15"
+                                  />
+                                </div>
+                              </BaseCard>
                           </div>
                       </div>
                   </div>
               </div>
-
-
-
-
-
-
               <div class="section3-card">
-                  <div class="cardB-table">表格</div>
+                  <BaseCard name="B区表格" cardId="b-table">
+                    <template #header>
+                      <div class="b-title"><h3>B区表格</h3></div>
+                    </template>
+                    <div class="cardB-table">
+                      <el-table :data="bTableData" style="width: 100%" max-height="340">
+                        <el-table-column prop="dept" label="部门" />
+                        <el-table-column prop="total" label="人数" />
+                        <el-table-column prop="onJob" label="在职" />
+                        <el-table-column prop="leave" label="离职" />
+                        <el-table-column prop="entry" label="入职" />
+                        <el-table-column prop="regular" label="转正" />
+                      </el-table>
+                    </div>
+                  </BaseCard>
               </div>
           </div>
       </div>
@@ -128,7 +135,7 @@ v-model:visible="showLevelModal"
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
+import { ref, onMounted, onBeforeUnmount, nextTick, watch, computed } from 'vue';
 import { IconSettings, IconDownload, IconUser, IconHome } from '@arco-design/web-vue/es/icon';
 import { useRouter } from 'vue-router';
 import { Tooltip as ATooltip } from '@arco-design/web-vue';
@@ -138,6 +145,9 @@ import * as echarts from 'echarts';
 import Modal from './Modal.vue';
 import { Table as ATable } from '@arco-design/web-vue';
 import '@arco-design/web-vue/dist/arco.css';
+import BaseCard from '../components/BaseCard.vue';
+import { ElTable, ElTableColumn } from 'element-plus';
+import 'element-plus/dist/index.css';
 
 const router = useRouter();
 
@@ -212,12 +222,13 @@ function initChart() {
           const leaveData = [3, 5, 4, 6, 7, 5, 8, 7, 6, 9, 10, 8]; // 离职
           const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
 
+          const gridLeft = computed(() => trendZoom.value ? 80 : 42)
 
           chartA1.setOption({
               title: { text: '', left: 'left', top: 0 },
               tooltip: { trigger: 'axis' },
               legend: { data: ['在职', '离职'], right: 20, top: 10, textStyle: { fontSize: 15, color: '#222' }, itemWidth: 30 },
-              grid: { left: 50, right: 30, top: 40, bottom: 40 },
+              grid: { left: gridLeft.value, right: 0, top: 40, bottom: 28 },
               xAxis: {
                   type: 'category', data: months,
                   axisLabel: { fontSize: 15 },
@@ -246,7 +257,7 @@ function initChart() {
                       symbolSize: 8
                   }
               ]
-          });
+          }, { notMerge: true });
 
           // 窗口大小变化时重新渲染图表
           window.addEventListener('resize', () => {
@@ -261,6 +272,7 @@ function initChart() {
 // 年龄分布
 
 const agePieRef = ref(null);
+const ageZoom = ref(false)
 
 onMounted(() => {
 nextTick(() => {
@@ -308,6 +320,56 @@ nextTick(() => {
   }
 });
 });
+
+watch(ageZoom, (val) => {
+  if (val) {
+    nextTick(() => {
+      if (agePieRef.value) {
+        const chart = echarts.init(agePieRef.value);
+        chart.setOption({
+          tooltip: { trigger: 'item' },
+          legend: { show: false },
+          series: [
+            {
+              name: '年龄分布',
+              type: 'pie',
+              radius: ['30%', '50%'],
+              center: ['50%', '40%'],
+              avoidLabelOverlap: false,
+              label: {
+                show: true,
+                position: 'outside',
+                formatter: '{b}\n{c}人 ({d}%)',
+              },
+              emphasis: {
+                label: {
+                  show: true,
+                  fontSize: 18,
+                  fontWeight: 'bold'
+                }
+              },
+              labelLine: {
+                show: true,
+                length: 20,
+                length2: 10
+              },
+              color: ['#2257f4', '#4e7fff', '#00d26a', '#ffb300', '#ff3b3b'],
+              data: [
+                { value: 120, name: '18-25岁' },
+                { value: 200, name: '26-35岁' },
+                { value: 150, name: '36-45岁' },
+                { value: 80,  name: '46-55岁' },
+                { value: 40,  name: '55岁以上' }
+              ]
+            }
+          ]
+        });
+        chart.resize();
+        window.addEventListener('resize', () => chart.resize());
+      }
+    });
+  }
+})
 
 
 
@@ -480,6 +542,145 @@ if (chartInstance) {
 }
 window.removeEventListener('resize', resizeChart)
 })
+
+const trendZoom = ref(false)
+watch(trendZoom, (val) => {
+  if (val) {
+    nextTick(() => {
+      if (chartA1Ref.value) {
+        const chartA1 = echarts.init(chartA1Ref.value);
+        // 重新设置 option
+        const entryData = [12, 18, 15, 20, 25, 22, 30, 28, 26, 32, 35, 31];
+        const leaveData = [3, 5, 4, 6, 7, 5, 8, 7, 6, 9, 10, 8];
+        const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+        const gridLeft = computed(() => val ? 80 : 42)
+        chartA1.setOption({
+          title: { text: '', left: 'left', top: 0 },
+          tooltip: { trigger: 'axis' },
+          legend: { data: ['在职', '离职'], right: 20, top: 10, textStyle: { fontSize: 15, color: '#222' }, itemWidth: 30 },
+          grid: { left: gridLeft.value, right: 0, top: 40, bottom: 28 },
+          xAxis: {
+            type: 'category', data: months,
+            axisLabel: { fontSize: 15 },
+            splitLine: { show: false },
+            axisLine: { show: false },
+            axisTick: { show: false }
+          },
+          yAxis: { type: 'value', name: '人数', axisLabel: { fontSize: 15 }, splitLine: { show: false } },
+          series: [
+            {
+              name: '在职',
+              type: 'line',
+              data: entryData,
+              itemStyle: { color: '#222' },
+              lineStyle: { color: '#222', width: 3 },
+              symbol: 'circle',
+              symbolSize: 8
+            },
+            {
+              name: '离职',
+              type: 'line',
+              data: leaveData,
+              itemStyle: { color: '#2257f4' },
+              lineStyle: { type: 'dashed', color: '#2257f4', width: 3 },
+              symbol: 'circle',
+              symbolSize: 8
+            }
+          ]
+        });
+        chartA1.resize();
+        window.addEventListener('resize', () => chartA1.resize());
+      }
+    });
+  }
+})
+
+const levelZoom = ref(false)
+watch(levelZoom, (val) => {
+  if (val) {
+    nextTick(() => {
+      if (levelBarRef.value) {
+        chartInstance = echarts.init(levelBarRef.value)
+        chartInstance.setOption(option)
+        chartInstance.resize()
+        chartInstance.off('click')
+        chartInstance.on('click', function(params) {
+          if (params.componentType === 'series') {
+            modalInfo.value = { level: params.name, value: params.value }
+            tableData.value = allLevelData[params.name] || []
+            showLevelModal.value = true
+          }
+        })
+        window.addEventListener('resize', () => chartInstance.resize())
+      }
+    })
+  }
+})
+
+const cardBarRefs = ref([])
+const card1BarData = [12, 18, 15, 20, 25, 22, 30, 28, 26, 32, 35, 31]
+const card1BarMonths = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+onMounted(() => {
+  nextTick(() => {
+    cardBarRefs.value.forEach((el, idx) => {
+      if (el) {
+        const chart = echarts.init(el)
+        chart.setOption({
+          grid: { left: 24, right: 16, top: 24, bottom: 28 },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'shadow' },
+            formatter: function(params) {
+              const p = params[0];
+              return `${p.axisValue}：${p.data}人`;
+            }
+          },
+          xAxis: {
+            type: 'category',
+            data: card1BarMonths,
+            axisLabel: { show: false },
+            axisLine: { show: false },
+            axisTick: { show: false },
+            splitLine: { show: false }
+          },
+          yAxis: {
+            type: 'value',
+            name: '',
+            axisLabel: { show: false },
+            axisLine: { show: false },
+            axisTick: { show: false },
+            splitLine: { show: false }
+          },
+          series: [{
+            data: card1BarData,
+            type: 'bar',
+            itemStyle: { color: '#2257f4' },
+            barWidth: '60%'
+          }]
+        })
+        window.addEventListener('resize', () => chart.resize())
+      }
+    })
+  })
+})
+
+const bTableData = [
+  { dept: '技术部', total: 120, onJob: 110, leave: 5, entry: 8, regular: 6 },
+  { dept: '产品部', total: 80, onJob: 75, leave: 2, entry: 4, regular: 3 },
+  { dept: '设计部', total: 60, onJob: 58, leave: 1, entry: 2, regular: 2 },
+  { dept: '市场部', total: 50, onJob: 48, leave: 1, entry: 2, regular: 1 },
+  { dept: '运营部', total: 90, onJob: 85, leave: 3, entry: 5, regular: 4 },
+  { dept: '行政部', total: 40, onJob: 38, leave: 1, entry: 1, regular: 1 },
+  { dept: '财务部', total: 35, onJob: 33, leave: 1, entry: 1, regular: 1 },
+  { dept: '法务部', total: 20, onJob: 19, leave: 0, entry: 1, regular: 1 },
+  { dept: '人事部', total: 25, onJob: 24, leave: 0, entry: 1, regular: 1 },
+  { dept: '采购部', total: 30, onJob: 28, leave: 1, entry: 2, regular: 1 },
+  { dept: '物流部', total: 45, onJob: 43, leave: 1, entry: 2, regular: 2 },
+  { dept: '客服部', total: 55, onJob: 52, leave: 2, entry: 3, regular: 2 },
+  { dept: '研发部', total: 100, onJob: 95, leave: 2, entry: 5, regular: 3 },
+  { dept: '公关部', total: 22, onJob: 21, leave: 0, entry: 1, regular: 1 },
+  { dept: '信息部', total: 18, onJob: 17, leave: 0, entry: 1, regular: 1 },
+];
 
 </script>
 
@@ -873,14 +1074,22 @@ button:hover {
   gap: 16px;
   width: 100%;
   height: 100%;
+
   justify-content: space-between;
   align-items: center;
+}
+
+.card-item,
+.card1-flex {
+  height: 190px;
+  min-height: 190px;
+  max-height: 190px;
+  box-sizing: border-box;
 }
 
 .card-item {
   flex: 1;
   min-width: 0;
-  height: 190px;
   background: #fff;
   display: flex;
   align-items: center;
@@ -890,7 +1099,7 @@ button:hover {
 }
 
 .section-3 {
-  min-height: 510px;
+  height: 100%;
   margin: 0px 80px 0 80px;
   display: flex;
   align-items: center;
@@ -917,69 +1126,45 @@ button:hover {
   display: flex;
   gap: 16px;
   width: 100%;
-  height: 100%;
   justify-content: stretch;
   align-items: stretch;
 }
-
 .section3-card {
   flex: 1 1 0;
   min-width: 0;
   max-width: none;
-  height: 510px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: #7c3aed;
   font-size: 1.1rem;
   font-weight: 500;
 }
-
-/* 卡片A内部布局 */
+.base-card-content {
+  padding: 1rem 1.5rem 0 1.5rem;
+  box-sizing: border-box;
+}
 .cardA-inner {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   gap: 16px;
 }
-
-.cardA-row1 {
-  background-color: #fff;
-  height: 50%;
-  overflow: hidden;
-}
-
-.cardA-row2 {
-  display: flex;
-  overflow: hidden;
-  gap: 12px;
-  height: 50%;
- 
-}
-
-.cardA-row2-item {
-  flex: 1;
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.05rem;
-  color: #597ef7;
-  background: #fff;
-}
-
 .cardB-table {
-  background-color: #fff;
-  height: 100%;
   width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .a1-title {
 
   margin-left: 20px;
   margin-top: 10px;
-
+ 
   width: 100%;
   display: flex;
 
@@ -993,10 +1178,10 @@ button:hover {
 .chart-container {
   width: 100%;
   height: 100%;
-  margin-top: 10px;
-  margin-bottom: 0;
-
-
+  border: 3px solid red;
+  padding: 0;
+  margin: 0;
+  /* background: none; // 去除调试色 */
 }
 
 
@@ -1022,7 +1207,6 @@ flex: 0 0 auto; /* 标题不伸缩，保持内容高度 */
 flex: 1 1 auto; /* 图表区域填充剩余空间 */
 min-height: 200px; /* 设置最小高度防止内容溢出 */
 
-
 }
 
 
@@ -1044,5 +1228,92 @@ min-height: 200px; /* 设置最小高度防止内容溢出 */
 flex: 1 1 auto; /* 图表区域填充剩余空间 */
 min-height: 200px; /* 设置最小高度防止内容溢出 */
 
+}
+
+/* 顶部卡片1左右布局样式 */
+.card1-flex {
+  display: flex;
+
+  flex-direction: row;
+  align-items: stretch;
+  height: 100%;
+}
+.card1-indicator {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  background: ;
+  border-right: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #394ca2;
+}
+.card1-chart {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* 指标区内容样式 */
+.indicator-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.indicator-icon {
+  margin-bottom: 0.5rem;
+}
+.indicator-number {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0.2rem;
+}
+.indicator-label {
+  font-size: 1rem;
+  color: #666;
+}
+
+.card1-bar-chart {
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+}
+
+/* 让B区表格内容区和表格都100%填充 */
+:deep(.section3-card-list) {
+  height: 100%;
+  display: flex;
+}
+:deep([cardid="b-table"].section3-card) {
+  height: 100%;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+}
+:deep([cardid="b-table"] .base-card-content) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.cardB-table {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+:deep([cardid="b-table"] .el-table) {
+  width: 100% !important;
+  min-width: 0 !important;
 }
 </style>

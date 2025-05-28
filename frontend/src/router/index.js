@@ -48,6 +48,11 @@ const routes = [
     path: '/test',
     name: 'Test',
     component: Test
+  },
+  {
+    path: '/toolbox',
+    name: 'Toolbox',
+    component: () => import('../views/Toolbox.vue')
   }
   // 后续可添加其他路由配置
 ]
