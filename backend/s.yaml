@@ -1,0 +1,27 @@
+edition: 1.0.0
+name: backend-express
+access: default
+
+services:
+  backend-express:
+    component: fc
+    props:
+      region: cn-hangzhou
+      service:
+        name: backend-express
+      function:
+        name: backend-express
+        handler: server.handler
+        runtime: nodejs16
+        timeout: 60
+        memorySize: 256
+        codeUri: ./
+        environmentVariables:
+          NODE_ENV: production
+          # NEON_DATABASE_URL 建议在 FC 控制台服务变量中配置
+        triggers:
+          - name: httpTrigger
+            type: http
+            config:
+              authType: anonymous
+              methods: ['GET', 'POST', 'PUT', 'DELETE']

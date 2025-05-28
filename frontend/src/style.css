@@ -1,0 +1,29 @@
+/* ... (其他根样式不变) ... */
+
+/* 确保html, body, #app占满视口且无额外空间 */
+html, body, #app {
+  height: 100vh;
+  margin: 0;
+  padding: 0; /* 移除全局padding */
+  box-sizing: border-box; /* 确保padding不影响height */
+  /* 确保没有全局overflow设置 */
+  overflow: initial; /* 或者直接删除任何overflow相关的行 */
+}
+
+body {
+  /* 移除全局flex布局和居中，避免干扰子元素 */
+  display: block; /* 或删除 display/place-items */
+  place-items: initial;
+  min-width: 320px;
+  min-height: 100vh; /* 保留min-height */
+}
+
+#app {
+  width: 100%; /* 让#app宽度占满 */
+  max-width: none; /* 通常不再需要max-width */
+  margin: 0; /* 移除margin auto */
+  padding: 0; /* 移除padding */
+  text-align: initial; /* 移除全局文本居中 */
+}
+
+/* ... (其他样式，如h1, button, card等不变) ... */

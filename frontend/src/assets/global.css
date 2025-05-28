@@ -1,0 +1,15 @@
+/* 强制覆盖arco表格所有背景色和字体颜色 */
+.e1-table .arco-table,
+.e1-table .arco-table-container,
+.e1-table .arco-table-content,
+.e1-table .arco-table-header,
+.e1-table .arco-table-th,
+.e1-table .arco-table-td,
+.e1-table .arco-table-cell,
+.e1-table td,
+.e1-table th,
+.e1-table .arco-table-placeholder {
+  background: rgba(21,37,53,0.4) !important;
+  box-shadow: none !important;
+  color: #fff !important;
+} 
