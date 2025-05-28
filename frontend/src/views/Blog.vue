@@ -67,7 +67,7 @@ function handleMore() {
   box-sizing: border-box;
   overflow: auto; /* 内容超出时自身滚动 */
   margin: 0 auto; /* 水平居中 */
-  margin-top: -65px; /* 与Header重叠 */;
+  margin-top: 20px;
   padding: 1.2rem;
 }
 

@@ -1,62 +1,60 @@
 <template>
-  <header class="header-root">
-    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-full flex justify-center pointer-events-none">
-      <div class="flex flex-row items-center bg-white rounded-full px-4 py-2 shadow-lg border border-gray-200 transition-all duration-300 group pointer-events-auto"
-           :class="isAnyHovered ? 'scale-x-105' : ''">
-        <!-- 左侧2个主导航 -->
-        <div
-          v-for="(item, idx) in navbarLeft"
-          :key="item.label"
-          class="group/item relative"
-          @mouseenter="hoveredIndex = 'nav-left-' + idx; isAnyHovered = true"
-          @mouseleave="hoveredIndex = null; isAnyHovered = false"
+  <div class="fixed bottom-5 left-0 w-full z-50 flex justify-center pointer-events-none">
+    <div class="flex flex-row items-center bg-white rounded-full px-4 pt-2 h-16 shadow-lg border border-gray-200 transition-all duration-300 group pointer-events-auto"
+         :class="isAnyHovered ? 'scale-x-105' : ''">
+      <!-- 左侧2个主导航 -->
+      <div
+        v-for="(item, idx) in navbarLeft"
+        :key="item.label"
+        class="group/item relative"
+        @mouseenter="hoveredIndex = 'nav-left-' + idx; isAnyHovered = true"
+        @mouseleave="hoveredIndex = null; isAnyHovered = false"
+      >
+        <button
+          class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-300 focus:outline-none"
+          :aria-label="item.label"
+          @click="idx === 0 ? router.push('/') : (idx === 1 ? router.push('/portfolio') : null)"
         >
-          <button
-            class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-300 focus:outline-none"
-            :aria-label="item.label"
-            @click="idx === 0 ? router.push('/') : (idx === 1 ? router.push('/portfolio') : null)"
-          >
-            <img :src="item.icon" class="navbar-icon-img text-xl group-hover/item:scale-125 transition-transform duration-300" />
-          </button>
-          <!-- Tooltip -->
-          <div v-if="hoveredIndex === 'nav-left-' + idx" class="navbar-tooltip">
-            {{ item.label }}
-          </div>
+          <img :src="item.icon" class="navbar-icon-img text-xl group-hover/item:scale-125 transition-transform duration-300" />
+        </button>
+        <!-- Tooltip -->
+        <div v-if="hoveredIndex === 'nav-left-' + idx" class="navbar-tooltip">
+          {{ item.label }}
         </div>
-        <div class="w-px h-8 bg-gray-200 mx-2"></div>
-        <!-- 右侧3个主导航 -->
-        <div
-          v-for="(item, idx) in navbarRight"
-          :key="item.label"
-          class="group/item relative"
-          @mouseenter="hoveredIndex = 'nav-right-' + idx; isAnyHovered = true"
-          @mouseleave="hoveredIndex = null; isAnyHovered = false"
+      </div>
+      <div class="w-px h-8 bg-gray-200 mx-2"></div>
+      <!-- 右侧3个主导航 -->
+      <div
+        v-for="(item, idx) in navbarRight"
+        :key="item.label"
+        class="group/item relative"
+        @mouseenter="hoveredIndex = 'nav-right-' + idx; isAnyHovered = true"
+        @mouseleave="hoveredIndex = null; isAnyHovered = false"
+      >
+        <button
+          class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-300 focus:outline-none"
+          :aria-label="item.label"
+          @click="idx === 0 ? router.push('/livedata') : (idx === 1 ? router.push('/database') : (idx === 2 ? router.push('/blog') : (idx === 3 ? router.push('/test') : null)))"
         >
-          <button
-            class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-300 focus:outline-none"
-            :aria-label="item.label"
-            @click="idx === 0 ? router.push('/livedata') : (idx === 1 ? router.push('/database') : (idx === 2 ? router.push('/blog') : (idx === 3 ? router.push('/test') : null)))"
-          >
-            <img :src="item.icon" class="navbar-icon-img text-xl group-hover/item:scale-125 transition-transform duration-300" />
-          </button>
-          <!-- Tooltip -->
-          <div v-if="hoveredIndex === 'nav-right-' + idx" class="navbar-tooltip">
-            {{ item.label }}
-          </div>
+          <img :src="item.icon" class="navbar-icon-img text-xl group-hover/item:scale-125 transition-transform duration-300" />
+        </button>
+        <!-- Tooltip -->
+        <div v-if="hoveredIndex === 'nav-right-' + idx" class="navbar-tooltip">
+          {{ item.label }}
         </div>
-        <div class="w-px h-8 bg-gray-200 mx-2"></div>
-        <!-- 主题切换 -->
-        <div class="group/item relative" @mouseenter="hoveredIndex = 'theme'; isAnyHovered = true" @mouseleave="hoveredIndex = null; isAnyHovered = false">
-          <button class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-300 focus:outline-none" aria-label="Theme">
-            <component :is="isDark ? IconSun : IconMoon" class="navbar-icon-img text-xl group-hover/item:scale-125 transition-transform duration-300" />
-          </button>
-          <div v-if="hoveredIndex === 'theme'" class="navbar-tooltip">
-            适配中...
-          </div>
+      </div>
+      <div class="w-px h-8 bg-gray-200 mx-2"></div>
+      <!-- 主题切换 -->
+      <div class="group/item relative" @mouseenter="hoveredIndex = 'theme'; isAnyHovered = true" @mouseleave="hoveredIndex = null; isAnyHovered = false">
+        <button class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-300 focus:outline-none" aria-label="Theme">
+          <component :is="isDark ? IconSun : IconMoon" class="navbar-icon-img text-xl group-hover/item:scale-125 transition-transform duration-300" />
+        </button>
+        <div v-if="hoveredIndex === 'theme'" class="navbar-tooltip">
+          适配中...
         </div>
       </div>
     </div>
-  </header>
+  </div>
 </template>
 
 <script setup>
@@ -130,19 +128,10 @@ const navbarRight = [
   font-size: 0.95rem;
   white-space: nowrap;
   padding: 4px 14px;
-  
   z-index: 20;
   opacity: 1;
   pointer-events: none;
   box-shadow: 0 2px 8px #0002;
   transition: opacity 0.2s;
-}
-
-/* 固定Header高度 */
-.header-root {
-  height: 64px;
-  min-height: 64px;
-  max-height: 64px;
-  box-sizing: border-box;
 }
 </style>

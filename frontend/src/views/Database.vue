@@ -1,5 +1,13 @@
 <template>
-  <div class="database-main">
+  <Header />
+  <a-modal v-model:visible="visible" title="请输入访问密码" :closable="true" :mask-closable="false" @ok="handleOk" @close="handleClose">
+    <a-input-password v-model="password" placeholder="请输入密码" @pressEnter="handleOk" />
+    <template #footer>
+      <a-button @click="handleOk" type="primary">确定</a-button>
+    </template>
+    <div v-if="error" style="color: #f53f3f; margin-top: 8px;">密码错误，请重试。</div>
+  </a-modal>
+  <div v-if="authed" class="database-main">
     <div class="database-header">
       <div class="database-actions">
         <span
@@ -72,14 +80,14 @@
 </template>
 
 <script setup>
-console.log('VITE_API_BASE:', import.meta.env.VITE_API_BASE)
-
-import { useRouter, useRoute } from 'vue-router'
+import Header from '../components/Header.vue'
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import axios from 'axios'
 import { Message } from '@arco-design/web-vue'
 import * as XLSX from 'xlsx'
 import MonacoEditor from 'monaco-editor-vue3'
+import { useRouter, useRoute } from 'vue-router'
+import { Modal as AModal, InputPassword as AInputPassword, Button as AButton } from '@arco-design/web-vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -199,6 +207,29 @@ function onExport() {
   const wb = XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
   XLSX.writeFile(wb, '查询结果.xlsx')
+}
+
+const visible = ref(true)
+const password = ref('')
+const error = ref(false)
+const authed = ref(false)
+
+function handleOk() {
+  if (password.value === '1005') {
+    visible.value = false
+    error.value = false
+    authed.value = true
+  } else {
+    error.value = true
+  }
+}
+
+function handleClose() {
+  password.value = ''
+  error.value = false
+  if (!authed.value) {
+    router.push('/')
+  }
 }
 </script>
 

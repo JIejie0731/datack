@@ -1,3 +1,25 @@
+/* 合并自定义全局样式 */
+html, body, #app {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: initial;
+}
+body {
+  display: block;
+  place-items: initial;
+  min-width: 320px;
+  min-height: 100vh;
+}
+#app {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: initial;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

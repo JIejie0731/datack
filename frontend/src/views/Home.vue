@@ -3,10 +3,11 @@
 <Header />
 
   <div class="home-root">
- 
+    
     <div class="home-header-row">
       <div>
         <div class="home-title">梁永顺</div>
+      
         <div class="home-subtitle">数据分析 看板开发</div>
       </div>
       <img class="home-avatar" src="../assets/头像.JPG" alt="avatar" />
@@ -184,6 +185,8 @@ function goFeishu() {
   min-height: 100vh !important;
   box-sizing: border-box;
   overflow-y: auto;
+margin-top: 65px;
+
   
 }
 body, html, #app {

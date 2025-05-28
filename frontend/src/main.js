@@ -1,11 +1,10 @@
 import { createApp } from 'vue'
-import './style.css'
+import './index.css'
 import App from './App.vue'
 import router from './router'
 import ArcoVue from '@arco-design/web-vue'
 import '@arco-design/web-vue/dist/arco.css'
 import '@/assets/global.css'
-import './index.css'
 
 // 添加 Monaco 环境配置，解决 Web Worker 问题
 window.MonacoEnvironment = {

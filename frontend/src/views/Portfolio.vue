@@ -108,7 +108,7 @@
     overflow: auto; /* 内容超出时自身滚动 */
     margin: 0 auto; /* 水平居中 */
     padding: 0 1.2rem;
-   margin-top: -65px;
+    margin-top: 20px;
   }
   
   .title-area {
