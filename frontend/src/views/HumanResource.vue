@@ -978,14 +978,13 @@ async function getProvinceDataByGeoJSON(mapName) {
   return features.map(f => ({ name: f.properties.name, value: Math.floor(Math.random() * 100) + 10 }));
 }
 
-// 动态加载地图geoJSON
+// 动态加载地图geoJSON（本地化中国地图）
 async function loadMap(mapName, provinceName = '') {
   if (!echarts.getMap(mapName)) {
     let url = '';
     if (mapName === 'china') {
-      url = 'https://geo.datav.aliyun.com/areas_v3/bound/geojson?code=100000_full';
+      url = '/china.json'; // 本地geojson
     } else {
-      // 全中国省份行政区划代码（全称）
       const provinceCodeMap = {
         '北京市': '110000', '天津市': '120000', '河北省': '130000', '山西省': '140000', '内蒙古自治区': '150000',
         '辽宁省': '210000', '吉林省': '220000', '黑龙江省': '230000',
@@ -1000,7 +999,7 @@ async function loadMap(mapName, provinceName = '') {
         alert('暂不支持该省下钻');
         return;
       }
-      url = `https://geo.datav.aliyun.com/areas_v3/bound/geojson?code=${code}_full`;
+      url = `/province/${code}.json`; // 本地省份geojson
     }
     const res = await fetch(url);
     const geoJson = await res.json();
