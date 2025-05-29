@@ -22,7 +22,7 @@ const dbStatus = ref('checking');
 async function checkDb() {
   dbStatus.value = 'checking';
   try {
-    const res = await fetch('/api/db-status');
+    const res = await fetch(`${import.meta.env.VITE_API_BASE}/db-status`);
     const data = await res.json();
     dbStatus.value = data.status === 'connected' ? 'connected' : 'error';
   } catch (e) {
