@@ -45,6 +45,11 @@ const routes = [
     component: HumanResource
   },
   {
+    path: '/hr-dashboard',
+    name: 'HRDashboard',
+    component: HumanResource
+  },
+  {
     path: '/test',
     name: 'Test',
     component: Test

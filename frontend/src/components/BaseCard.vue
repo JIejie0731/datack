@@ -66,6 +66,14 @@ watch(() => props.modelValue, (val) => {
 </script>
 
 <style scoped>
+.base-card,
+.base-card:hover,
+.base-card:active,
+.base-card:focus {
+  transition: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
 .base-card {
   background: #fff;
   border-radius: 0;
@@ -77,16 +85,18 @@ watch(() => props.modelValue, (val) => {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  border: 1px solid red;
+ 
 }
 .base-card-header {
-  padding: 0.3rem 0.3rem 0.3rem 0;
+  padding: 0.3rem 0.3rem 0.3rem 0.6rem;
+
+  border-bottom: 1px solid #f2eeee;
   font-size: 1.15rem;
   font-weight: bold;
   font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
   color: #222;
   text-align: left;
-  border-bottom: 1px solid #f0f0f0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -108,7 +118,7 @@ watch(() => props.modelValue, (val) => {
   cursor: pointer;
   padding: 0 0 0 0;
   display: flex;
-  background: yellow;
+
   align-items: center;
 }
 .zoom-btn:hover svg {
@@ -136,14 +146,11 @@ watch(() => props.modelValue, (val) => {
   height: 80vh;
   min-width: 320px;
   min-height: 200px;
-  border: 1px solid red;
+ 
   padding: 20px 30px 40px 30px;
   transform: scale(1.0);
   transition: transform 0.2s;
   display: flex;
   flex-direction: column;
-}
-.base-card:hover {
-  box-shadow: 0 6px 24px #0002;
 }
 </style> 
