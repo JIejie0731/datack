@@ -1020,7 +1020,7 @@
 .c1-metric-huanbi-label {
   font-size: 0.95rem;
   color: #cfd8dc;
-  margin-top: 1rem;
+  margin-top: 4.5rem;
   margin-bottom: 0.05rem;
   text-align: center;
 }

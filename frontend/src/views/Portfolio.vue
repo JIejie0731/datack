@@ -92,6 +92,14 @@
     router.push('/building-digital-twin') // 跳转到3D楼宇数字孪生与可视化大屏页面
   }
   // 这里可以添加测试用的逻辑
+  
+  // 自动重置全局样式，防止页面整体缩放异常
+  import { onMounted } from 'vue'
+  onMounted(() => {
+    document.documentElement.style.fontSize = '16px';
+    document.body.style.transform = 'none';
+    document.body.style.zoom = '1';
+  })
   </script>
   
   <style scoped>
@@ -235,7 +243,9 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: 19rem;
+    min-height: 19rem;
+    max-height: 19rem;
   }
   .project-card:hover {
     transform: rotateZ(1deg) rotateY(10deg) scale(1.06);
