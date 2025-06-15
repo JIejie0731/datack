@@ -3,7 +3,7 @@
   <div class="blog-contents">
     <div class="title-area">
       <div class="portfolio-title-row">
-        <h1 class="portfolio-title">Blog</h1>
+        <h1 class="portfolio-title">Blog（开发中···）</h1>
         <button class="button" @click="handleMore">
           <div class="button-box">
             <span class="button-elem">
@@ -61,13 +61,14 @@ function handleMore() {
 <style scoped>
 .blog-contents {
   width: 670px;
+
   height: calc(100vh - 65px); /* 占据整个视口高度 */
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   overflow: auto; /* 内容超出时自身滚动 */
   margin: 0 auto; /* 水平居中 */
-  margin-top: 20px;
+
   padding: 1.2rem;
 }
 

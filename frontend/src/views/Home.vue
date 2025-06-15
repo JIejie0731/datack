@@ -92,7 +92,7 @@
           <img class="social-icon" :src="dingtalkIcon" alt="dingtalk" style="width:40px;height:40px;" />
           <span class="social-name">@Dataseek</span>
         </div>
-        <div class="social-card" @click="goFeishu" style="cursor:pointer;">
+        <div class="social-card">
           <img class="social-icon" :src="feishuIcon" alt="feishu" style="width:40px;height:40px;" />
           <span class="social-name">@Dataseek</span>
         </div>

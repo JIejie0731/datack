@@ -41,17 +41,17 @@
             </div>
           </div>
           <div class="project-card" @click="goGmv">
-            <div class="project-background"></div>
+            <div class="project-background milktea-background"></div>
             <div class="project-info">
-              <div class="project-title">GMV大屏</div>
-              <div class="project-desc">GMV数据可视化大屏</div>
+              <div class="project-title">深圳X奶茶店运营大屏</div>
+              <div class="project-desc">深圳X奶茶店运营数据可视化大屏</div>
             </div>
           </div>
           <div class="project-card" @click="goAdvertising">
-            <div class="project-background"></div>
+            <div class="project-background building-background"></div>
             <div class="project-info">
-              <div class="project-title">广告投放分析</div>
-              <div class="project-desc">广告投放效果分析看板</div>
+              <div class="project-title">3D楼宇数字可视化</div>
+              <div class="project-desc">3D楼宇数字孪生与可视化大屏</div>
             </div>
           </div>
         </div>
@@ -85,11 +85,11 @@
   }
   // 处理GMV卡片点击事件
   function goGmv() {
-    router.push('/gmv') // 请确保已配置/gmv路由
+    router.push('/CombatMap') // 跳转到作战地图页面
   }
   // 处理广告投放卡片点击事件
   function goAdvertising() {
-    router.push('/advertising') // 请确保已配置/advertising路由
+    router.push('/building-digital-twin') // 跳转到3D楼宇数字孪生与可视化大屏页面
   }
   // 这里可以添加测试用的逻辑
   </script>
@@ -281,6 +281,16 @@
   }
   .hr-background {
     background-image: url('../assets/hr封面.png');
+    background-size: cover;
+    background-position: center;
+  }
+  .milktea-background {
+    background-image: url('../assets/开发中黑色封面.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .building-background {
+    background-image: url('../assets/开发中红色封面.jpg');
     background-size: cover;
     background-position: center;
   }

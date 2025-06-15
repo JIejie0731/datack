@@ -7,6 +7,8 @@ import Livedata from '../views/Livedata.vue'
 import Logistics from '../views/Logistics.vue'
 import HumanResource from '../views/HumanResource.vue'
 import Test from '../views/Test.vue'
+import CombatMap from '../views/CombatMap.vue' // 新增
+
 
 const routes = [
   {
@@ -50,6 +52,11 @@ const routes = [
     component: HumanResource
   },
   {
+    path: '/CombatMap',
+    name: 'CombatMap',
+    component: CombatMap
+  },
+  {
     path: '/test',
     name: 'Test',
     component: Test
@@ -58,6 +65,11 @@ const routes = [
     path: '/toolbox',
     name: 'Toolbox',
     component: () => import('../views/Toolbox.vue')
+  },
+  {
+    path: '/building-digital-twin',
+    name: 'BuildingDigitalTwin',
+    component: () => import('../views/BuildingDigitalTwin.vue')
   }
   // 后续可添加其他路由配置
 ]

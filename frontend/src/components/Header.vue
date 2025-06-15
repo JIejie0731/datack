@@ -34,13 +34,7 @@
         <button
           class="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100 transition-all duration-300 focus:outline-none"
           :aria-label="item.label"
-          @click="
-            idx === 0 ? router.push('/toolbox') :
-            idx === 1 ? router.push('/blog') :
-            idx === 2 ? router.push('/livedata') :
-            idx === 3 ? router.push('/database') :
-            idx === 4 ? router.push('/test') : null
-          "
+          @click="handleNavRightClick(idx)"
         >
           <img :src="item.icon" class="navbar-icon-img text-xl group-hover/item:scale-125 transition-transform duration-300" />
         </button>
@@ -61,11 +55,18 @@
       </div>
     </div>
   </div>
+  <a-modal v-model:visible="passwordVisible" title="请输入访问密码" :closable="true" :mask-closable="false" @ok="handlePasswordOk" @close="handlePasswordClose">
+    <a-input-password v-model="password" placeholder="请输入密码" @pressEnter="handlePasswordOk" />
+    <template #footer>
+      <a-button @click="handlePasswordOk" type="primary">确定</a-button>
+    </template>
+    <div v-if="error" style="color: #f53f3f; margin-top: 8px;">密码错误，请重试。</div>
+  </a-modal>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { IconHome, IconFolderDelete, IconDesktop, IconBarChart, IconPalette, IconMoon, IconSun } from '@arco-design/web-vue/es/icon';
 import homeIcon from '../assets/主页.png'
 import projectIcon from '../assets/作品集.png'
@@ -76,9 +77,14 @@ import testIcon from '../assets/测试.png'
 import toolboxIcon from '../assets/工具箱.png'
 
 const router = useRouter()
+const route = useRoute()
 const isAnyHovered = ref(false)
 const hoveredIndex = ref(null)
 const isDark = ref(false)
+const passwordVisible = ref(false)
+const password = ref('')
+const error = ref(false)
+const showPasswordModalOnRoute = ref(false)
 
 const navbarLeft = [
   { icon: homeIcon, label: '主页' },
@@ -91,6 +97,43 @@ const navbarRight = [
   { icon: dbIcon, label: '数据库' },
   { icon: testIcon, label: '测试' },
 ];
+
+function handleNavRightClick(idx) {
+  if (idx === 0) router.push('/toolbox')
+  else if (idx === 1) router.push('/blog')
+  else if (idx === 2) {
+    // 数据求索：先跳转再弹窗
+    showPasswordModalOnRoute.value = true
+    router.push('/livedata')
+  }
+  else if (idx === 3) router.push('/database')
+  else if (idx === 4) router.push('/test')
+}
+
+function handlePasswordOk() {
+  if (password.value === '1005') {
+    passwordVisible.value = false
+    error.value = false
+    password.value = ''
+    router.push('/livedata')
+  } else {
+    error.value = true
+  }
+}
+function handlePasswordClose() {
+  password.value = ''
+  error.value = false
+}
+
+watch(
+  () => route.path,
+  (val) => {
+    if (val === '/livedata' && showPasswordModalOnRoute.value) {
+      passwordVisible.value = true
+      showPasswordModalOnRoute.value = false
+    }
+  }
+)
 
 // const isDark = ref(false)
 // function setTheme(dark) {

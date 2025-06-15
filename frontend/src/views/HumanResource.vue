@@ -1,25 +1,25 @@
 <template>
   <div class="test-dashboard-bg">
-    <div class="hr-section section-1 nav-bar-fixed">
-      <div class="nav-bar-flex">
-        <div class="logo-title-group shrinkable">
-          <span class="logo-double-circle">
-            <span class="circle circle-blue"></span>
-            <span class="circle circle-purple"></span>
-            </span>
-          <span class="nav-title ellipsis">HR Dashboard</span>
-          <span class="nav-overview">Overview</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px; margin-left: 16px;">
-          <button :class="{ active: activeBtn === 'overview' }" @click="setActiveBtn('overview')">人力概览</button>
+      <div class="hr-section section-1 nav-bar-fixed">
+          <div class="nav-bar-flex">
+              <div class="logo-title-group shrinkable">
+                  <span class="logo-double-circle">
+                      <span class="circle circle-blue"></span>
+                      <span class="circle circle-purple"></span>
+                  </span>
+                  <span class="nav-title ellipsis">HR Dashboard</span>
+                  <span class="nav-overview">Overview</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; margin-left: 16px;">
+                  <button :class="{ active: activeBtn === 'overview' }" @click="setActiveBtn('overview')">人力概览</button>
           <a-tooltip content="开发中..." position="top">
             <button :class="{ active: activeBtn === 'map' }" @click="setActiveBtn('map')">招聘分析</button>
           </a-tooltip>
-        </div>
-        <a-space class="nav-selectors">
-          <a-tree-select v-model="selectedDept" :data="treeData" placeholder="请选择部门" style="width: 220px" />
-        </a-space>
-        <div class="nav-icons-user">
+              </div>
+              <a-space class="nav-selectors">
+                  <a-tree-select v-model="selectedDept" :data="treeData" placeholder="请选择部门" style="width: 220px" />
+              </a-space>
+              <div class="nav-icons-user">
           <a-tooltip content="返回作品集目录" position="top">
             <IconHome class="nav-icon" style="cursor:pointer;" @click="goPortfolio" />
           </a-tooltip>
@@ -27,21 +27,21 @@
             <IconDownload class="nav-icon" @click="downloadDashboardPDF" style="cursor:pointer;" />
           </a-tooltip>
           <IconUser class="nav-icon" />
-          <div class="user-info">
-            <a-tooltip :content="dbStatus === 'connected' ? '数据库已连接' : '数据库未连接'" position="top">
-              <span class="user-name ellipsis">PGSQL</span>
-            </a-tooltip>
-            <span class="user-role">
+                  <div class="user-info">
+                      <a-tooltip :content="dbStatus === 'connected' ? '数据库已连接' : '数据库未连接'" position="top">
+                          <span class="user-name ellipsis">PGSQL</span>
+                      </a-tooltip>
+                      <span class="user-role">
               <span
                 :class="['status-dot', dbStatus]"
                 aria-label="数据库状态"
               ></span>
               {{ dbStatus === 'connected' ? 'Succeed' : (dbStatus === 'checking' ? 'Checking...' : 'Not Connected') }}
-            </span>
+                      </span>
+                  </div>
+              </div>
           </div>
       </div>
-    </div>
-    </div>
     <div class="main-content">
       <div class="content-area area-a">
         <div class="mini-card-list">
@@ -68,14 +68,14 @@
                 </span>
                 <span class="indicator-number">{{ index === 1 ? '200人' : (index === 2 ? '198人' : (index === 3 ? '134人' : '500人')) }}</span>
                 <span class="indicator-label">{{ index === 1 ? '离职人数' : (index === 2 ? '入职人数' : (index === 3 ? '转正人数' : '在职人数')) }}</span>
-        </div>
+          </div>
       </div>
             <div class="card1-chart">
               <div :ref="el => cardBarRefs[index] = el" class="card1-bar-chart" style="width: 100%; height: 100%;"></div>
-    </div>
-  </div>
-        </div>
-      </div>
+                          </div>
+                      </div>
+                              </div>
+                              </div>
       <div class="content-area area-b">
         <div class="b-card-list">
           <div class="b-card b-chart-card">
@@ -105,9 +105,9 @@
                     <div ref="a3BarChartZoomRef" style="width:100%;height:100%;"></div>
                   </template>
                 </BaseCard>
-              </div>
-            </div>
-          </div>
+                          </div>
+                              </div>
+                              </div>
           <div class="b-card b-table-card">
             <!-- 部门统计表格，放大时弹窗内容区高度固定，表格高度100%防止溢出 -->
             <BaseCard name="部门统计" v-model:zoom="tableZoom">
@@ -125,12 +125,12 @@
                     <el-table-column prop="entry" label="入职" />
                     <el-table-column prop="regular" label="转正" />
                   </el-table>
-                </div>
+                          </div>
               </template>
             </BaseCard>
-          </div>
-        </div>
-      </div>
+                      </div>
+                  </div>
+              </div>
       <div class="content-area area-c">
         <div class="c-card-list">
           <div class="c-card">
@@ -164,7 +164,7 @@
                   <div ref="workAgePieZoomRef" style="width:100%;height:100%;"></div>
                 </template>
               </BaseCard>
-            </div>
+              </div>
           </div>
           <div class="c-card">
             <div class="c-subcard-list">
@@ -184,7 +184,7 @@
                   <div ref="performanceBarZoomRef" style="width:100%;height:100%;"></div>
                 </template>
               </BaseCard>
-            </div>
+      </div>
           </div>
           <div class="c-card">
             <div class="c-subcard-list">
@@ -231,7 +231,7 @@ const activeBtn = ref('overview');
 function setActiveBtn(name) {
   activeBtn.value = name;
   if (name === 'overview') {
-    router.push('/hr-dashboard');
+      router.push('/hr-dashboard');
   }
   // 取消作战地图跳转逻辑
 }
@@ -332,42 +332,42 @@ function renderA1LineChart(targetRef) {
   if (targetRef.value) {
     const chart = echarts.init(targetRef.value);
     const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
-    const entryData = [12, 18, 15, 20, 25, 22, 30, 28, 26, 32, 35, 31]; // 入职
-    const leaveData = [3, 5, 4, 6, 7, 5, 8, 7, 6, 9, 10, 8]; // 离职
+          const entryData = [12, 18, 15, 20, 25, 22, 30, 28, 26, 32, 35, 31]; // 入职
+          const leaveData = [3, 5, 4, 6, 7, 5, 8, 7, 6, 9, 10, 8]; // 离职
     chart.setOption({
-      title: { text: '', left: 'left', top: 0 },
-      tooltip: { trigger: 'axis' },
+              title: { text: '', left: 'left', top: 0 },
+              tooltip: { trigger: 'axis' },
       legend: { data: ['入职', '离职'], right: 20, top: 10, textStyle: { fontSize: 15, color: '#222' }, itemWidth: 30 },
       grid: { left: 42, right: 0, top: 40, bottom: 28 },
-      xAxis: {
-        type: 'category', data: months,
-        axisLabel: { fontSize: 15 },
-        splitLine: { show: false },
-        axisLine: { show: false },
-        axisTick: { show: false }
-      },
-      yAxis: { type: 'value', name: '人数', axisLabel: { fontSize: 15 }, splitLine: { show: false } },
-      series: [
-        {
+              xAxis: {
+                  type: 'category', data: months,
+                  axisLabel: { fontSize: 15 },
+                  splitLine: { show: false },
+                  axisLine: { show: false },
+                  axisTick: { show: false }
+              },
+              yAxis: { type: 'value', name: '人数', axisLabel: { fontSize: 15 }, splitLine: { show: false } },
+              series: [
+                  {
           name: '入职',
-          type: 'line',
-          data: entryData,
+                      type: 'line',
+                      data: entryData,
           itemStyle: { color: '#222' },
-          lineStyle: { color: '#222', width: 3 },
-          symbol: 'circle',
-          symbolSize: 8
-        },
-        {
-          name: '离职',
-          type: 'line',
-          data: leaveData,
+                      lineStyle: { color: '#222', width: 3 },
+                      symbol: 'circle',
+                      symbolSize: 8
+                  },
+                  {
+                      name: '离职',
+                      type: 'line',
+                      data: leaveData,
           itemStyle: { color: '#2257f4' },
-          lineStyle: { type: 'dashed', color: '#2257f4', width: 3 },
-          symbol: 'circle',
-          symbolSize: 8
-        }
-      ]
-    });
+                      lineStyle: { type: 'dashed', color: '#2257f4', width: 3 },
+                      symbol: 'circle',
+                      symbolSize: 8
+                  }
+              ]
+          });
     window.addEventListener('resize', () => chart.resize());
   }
 }
@@ -410,7 +410,7 @@ function renderA2PieChart(targetRef) {
           label: {
             show: true,
             position: 'outside',
-            formatter: '{b}\n{c}人 ({d}%)',
+            formatter: '{b}\n{c}人 ({d}%)', 
           },
           emphasis: {
             label: {
@@ -442,7 +442,7 @@ function renderA2PieChart(targetRef) {
 onMounted(() => {
   nextTick(() => {
     renderA2PieChart(a2PieChartRef);
-  });
+});
 });
 
 watch(a2Zoom, (val) => {
@@ -466,33 +466,33 @@ function renderA3BarChart(targetRef) {
     const chart = echarts.init(targetRef.value);
     chart.setOption({
       grid: { top: 10, bottom: 20, left: 30, right: 20 },
-      xAxis: {
-        type: 'value',
+xAxis: {
+   type: 'value',
         max: 135,
-        splitLine: { show: false },
-        axisLabel: { show: false }
-      },
-      yAxis: {
+   splitLine: { show: false },
+   axisLabel: { show: false }
+},
+yAxis: {
         type: 'category',
-        data: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7'],
-        axisLabel: { fontSize: 13 },
-        splitLine: { show: false },
-        axisLine: { show: false },
-        axisTick: { show: false }
-      },
-      series: [
-        {
+  data: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7'],
+  axisLabel: { fontSize: 13 },
+                  splitLine: { show: false },
+                  axisLine: { show: false },
+                  axisTick: { show: false }
+},
+series: [
+  {
           data: [30, 50, 80, 120, 90, 60, 20],
-          type: 'bar',
-          showBackground: true,
+    type: 'bar',
+    showBackground: true,
           backgroundStyle: { color: 'rgba(180, 180, 180, 0.2)' },
-          label: {
+    label: {
             show: true,
             position: 'right',
             color: '#1d1e21',
             fontSize: 14,
-            formatter: '{c}人'
-          },
+formatter: '{c}人'
+},
           itemStyle: { color: '#3044f2' }
         }
       ]
@@ -612,7 +612,7 @@ function renderEduPieChart(targetRef) {
             { value: 100, name: '其他' }
           ],
           emphasis: {
-            itemStyle: {
+itemStyle: {
               shadowBlur: 10,
               shadowOffsetX: 0,
               shadowColor: 'rgba(0, 0, 0, 0.5)'
@@ -845,7 +845,7 @@ function renderJobStackChart(targetRef) {
       ]
     });
     window.addEventListener('resize', () => chart.resize());
-  }
+}
 }
 
 onMounted(() => {
@@ -1523,7 +1523,7 @@ height: 32rem;
   flex: 1 1 0;
   border: none;
   border-radius: 0;
-  display: flex;
+display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
