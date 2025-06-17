@@ -1,13 +1,20 @@
 <template>
-  <div class="nav-bar">导航栏</div>
+  <div class="nav-bar">
+    导航栏
+    <div class="district-btns">
+      <button class="district-btn" @click="resetView">深圳视角</button>
+      <button v-for="district in districtList" :key="district" class="district-btn" @click="() => focusDistrict(district)">{{ district }}</button>
+      <button class="district-btn" @click="toggleMapTheme">{{ mapTheme === 'dark' ? '切换白色' : '切换黑色' }}</button>
+      <button class="district-btn" @click="toggleCards">{{ showCards ? '隐藏卡片' : '显示卡片' }}</button>
+    </div>
+  </div>
   <div class="content-area">
-    <div class="indicator-cards">
+    <div v-if="showCards" class="indicator-cards">
       <div class="indicator-card">
         <div class="indicator-title">今日警情</div>
         <div class="indicator-value">{{ todayAlarms }}</div>
       </div>
     </div>
-    <button class="reset-btn" @click="resetView">深圳视角</button>
     <div id="mapContainer"></div>
   </div>
 </template>
@@ -21,12 +28,83 @@ const SZ_ZOOM = 11
 
 const todayAlarms = ref(12) // 示例数据，可替换为实际接口
 const showIndicators = ref(false)
+const showCards = ref(true) // 卡片显示状态
+let allMarkers = [] // 保存所有marker
+let allStores = [] // 保存所有门店数据
+let districtCenters = {} // 保存各区中心点
+let districtPolygons = {} // 保存各区边界多边形
+const mapTheme = ref('dark') // 当前主题
+
+// 手动设置的区中心点（如有）
+const manualDistrictCenters = {
+  '南山区': [113.9305, 22.5332],
+  '福田区': [114.055, 22.522],
+  '罗湖区': [114.123, 22.555],
+  '宝安区': [113.883, 22.555],
+  '龙岗区': [114.246, 22.721],
+  '龙华区': [114.029, 22.609],
+  '盐田区': [114.236, 22.557],
+  '光明区': [113.935, 22.748],
+  '坪山区': [114.346, 22.690],
+  '大鹏新区': [114.480, 22.590]
+}
+
+const districtList = [
+  '南山区', '福田区', '罗湖区', '宝安区', '龙岗区', '龙华区', '盐田区', '光明区', '坪山区', '大鹏新区'
+]
+
+// 区名与高对比度颜色映射
+const DISTRICT_COLORS = {
+  '南山区': '#e6194b', // 鲜红
+  '福田区': '#3cb44b', // 鲜绿
+  '罗湖区': '#ffe119', // 鲜黄
+  '宝安区': '#4363d8', // 鲜蓝
+  '龙岗区': '#f58231', // 橙色
+  '龙华区': '#911eb4', // 紫色
+  '盐田区': '#46f0f0', // 青色
+  '光明区': '#f032e6', // 粉紫
+  '坪山区': '#bcf60c', // 黄绿
+  '大鹏新区': '#fabebe'  // 粉红
+}
+function getDistrictColorByDistrict(district) {
+  return DISTRICT_COLORS[district] || '#888888'
+}
 
 function resetView() {
   if (map) {
     map.setCenter(SZ_CENTER)
     map.setZoom(SZ_ZOOM)
+    // 恢复显示全部门店
+    allMarkers.forEach(marker => marker.setMap(map))
   }
+}
+
+function focusDistrict(district) {
+  if (map) {
+    // 只显示对应区门店
+    allMarkers.forEach((marker, idx) => {
+      const store = allStores[idx]
+      if (store.district === district) {
+        marker.setMap(map)
+      } else {
+        marker.setMap(null)
+      }
+    })
+  }
+}
+
+function toggleMapTheme() {
+  if (mapTheme.value === 'dark') {
+    mapTheme.value = 'light'
+    map.setMapStyle('amap://styles/whitesmoke') // 高德官方白色主题
+  } else {
+    mapTheme.value = 'dark'
+    map.setMapStyle('amap://styles/dark')
+  }
+}
+
+function toggleCards() {
+  showCards.value = !showCards.value
 }
 
 onMounted(() => {
@@ -35,14 +113,27 @@ onMounted(() => {
   map = new window.AMap.Map('mapContainer', {
     center: SZ_CENTER, // 深圳中心
     zoom: SZ_ZOOM,
-    mapStyle: 'amap://styles/dark' // 科技感黑色底图
+    mapStyle: 'amap://styles/dark'
   })
 
-  // 集成深圳市高亮边界线
+  // 集成深圳市高亮边界线，并提取各区中心点和边界
   fetch('/shenzhen_streets.json').then(res => res.json()).then(geojson => {
     geojson.features.forEach(feature => {
+      const name = feature.properties.name
+      const center = manualDistrictCenters[name] || feature.properties.center || feature.properties.centroid
+      if (name && center) {
+        districtCenters[name] = center
+      }
+      // 保存边界多边形
       const coords = feature.geometry.coordinates
-      // 兼容MultiPolygon结构
+      let path = []
+      coords.forEach(polygon => {
+        polygon.forEach(ring => {
+          path.push(ring.map(([lng, lat]) => [lng, lat]))
+        })
+      })
+      districtPolygons[name] = path
+      // 画边界
       coords.forEach(polygon => {
         polygon.forEach(ring => {
           const path = ring.map(([lng, lat]) => [lng, lat])
@@ -60,78 +151,37 @@ onMounted(() => {
     })
   })
 
-  // 初始化Loca
-  // const loca = new window.Loca.Container({
-  //   map
-  // })
-
-  // // 深圳主要地铁站点（部分示例）
-  // const stations = [
-  //   [114.029, 22.609], // 深圳北站
-  //   [114.055, 22.541], // 福田
-  //   [114.117, 22.556], // 罗湖
-  //   [113.930, 22.533], // 南山
-  //   [113.883, 22.555], // 宝安中心
-  //   [113.811, 22.639], // 机场东
-  //   [114.246, 22.721], // 龙岗
-  //   [114.236, 22.557]  // 盐田港
-  // ]
-
-  // // 自动生成流线数据（模拟地铁站点间流动）
-  // const paths = []
-  // for (let i = 0; i < stations.length; i++) {
-  //   for (let j = 0; j < stations.length; j++) {
-  //     if (i !== j) {
-  //       paths.push([stations[i], stations[j]])
-  //     }
-  //   }
-  // }
-  // const data = paths.map(path => ({ coordinates: path }))
-
-  // // 创建流动线图层
-  // const lines = new window.Loca.PolylineLayer({
-  //   loca,
-  //   zIndex: 10
-  // })
-  // lines.setData(data, {
-  //   lnglat: 'coordinates'
-  // })
-  // lines.setStyle({
-  //   color: '#00eaff',
-  //   borderWidth: 2,
-  //   opacity: 0.7,
-  //   lineType: 'solid',
-  //   altitude: 0,
-  //   dashArray: [10, 10],
-  //   flowLength: 100,
-  //   flowColor: '#ff9800',
-  //   flowSpeed: 2
-  // })
-  // loca.add(lines)
-  // loca.animate.start()
-
-  // 加载并标记XX奶茶门店（SVG圆点icon方案）
-  const iconSvg = 'data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" fill="%238d4fff" stroke="white" stroke-width="2"/></svg>';
-  fetch('/xx_milktea.json').then(res => res.json()).then(stores => {
-    stores.forEach(store => {
-      const marker = new window.AMap.Marker({
-        position: [store.lng, store.lat],
-        icon: iconSvg,
-        anchor: 'center',
-        offset: new window.AMap.Pixel(0, 0)
-      });
-      marker.on('mouseover', function () {
-        marker.setLabel({
-          direction: 'top',
-          offset: new window.AMap.Pixel(0, -28),
-          content: store.name
+  // 加载并标记小米之家门店（紫色圆点icon方案）
+  fetch('/xiaomi_shops_sz.json').then(res => res.json()).then(stores => {
+    const storesArr = Array.isArray(stores) ? stores : (stores.data && stores.data.stores) || [];
+    allStores = storesArr
+    allMarkers = storesArr.map(store => {
+      const lat = parseFloat(store.position.lat);
+      const lng = parseFloat(store.position.lng);
+      if (!isNaN(lat) && !isNaN(lng)) {
+        const color = getDistrictColorByDistrict(store.district)
+        const iconSvg = `data:image/svg+xml;utf8,<svg width=\"20\" height=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"${color.replace('#','%23')}\" stroke=\"white\" stroke-width=\"2\"/></svg>`;
+        const marker = new window.AMap.Marker({
+          position: [lng, lat],
+          icon: iconSvg,
+          anchor: 'center',
+          offset: new window.AMap.Pixel(0, 0)
         });
-      });
-      marker.on('mouseout', function () {
-        marker.setLabel({ content: '' });
-      });
-      map.add(marker);
-    });
+        marker.on('mouseover', function () {
+          marker.setLabel({
+            direction: 'top',
+            offset: new window.AMap.Pixel(0, -28),
+            content: store.store_name
+          });
+        });
+        marker.on('mouseout', function () {
+          marker.setLabel({ content: '' });
+        });
+        map.add(marker);
+        return marker;
+      }
+      return null;
+    }).filter(Boolean);
   });
 })
 </script>
@@ -148,6 +198,28 @@ onMounted(() => {
   color: #232b3a;
   font-weight: bold;
   box-sizing: border-box;
+  position: relative;
+}
+.district-btns {
+  display: flex;
+  gap: 12px;
+  margin-left: 32px;
+}
+.district-btn {
+  background: #232b3a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.district-btn:hover {
+  background: #00eaff;
+  color: #232b3a;
 }
 .content-area {
   width: 100vw;
@@ -183,6 +255,26 @@ onMounted(() => {
   transition: background 0.2s;
 }
 .reset-btn:hover {
+  background: #00eaff;
+  color: #232b3a;
+}
+.nanshan-btn {
+  position: absolute;
+  top: 16px;
+  right: 140px;
+  z-index: 1000;
+  background: #232b3a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.nanshan-btn:hover {
   background: #00eaff;
   color: #232b3a;
 }

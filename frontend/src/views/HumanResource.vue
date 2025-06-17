@@ -89,7 +89,7 @@
                 </template>
               </BaseCard>
               <div class="b-charts-row">
-                <BaseCard name="年龄分布" class="b-chart-a2" v-model:zoom="a2Zoom">
+                <BaseCard name="年龄分布" class="b-chart-a2" v-model:zoom="a2Zoom" @click="showAgeDrill = true">
                   <template #default>
                     <div ref="a2PieChartRef" style="width:100%;height:100%;"></div>
                   </template>
@@ -210,6 +210,12 @@
       </div>
     </div>
   </div>
+  <DrillModal
+    v-model="showAgeDrill"
+    :columns="ageDrillColumns"
+    :data="ageDrillData"
+    title="年龄分布下钻"
+  />
 </template>
 
 <script setup>
@@ -223,6 +229,7 @@ import * as echarts from 'echarts';
 import BaseCard from '../components/BaseCard.vue';
 import { ElTable, ElTableColumn } from 'element-plus';
 import 'element-plus/dist/index.css';
+import DrillModal from '../components/DrillModal.vue';
 
 const router = useRouter();
 
@@ -1133,6 +1140,21 @@ watch(regionMapZoom, (val) => {
     });
   }
 });
+
+// 年龄分布下钻弹窗相关
+const showAgeDrill = ref(false);
+const ageDrillColumns = [
+  { prop: 'name', label: '姓名' },
+  { prop: 'age', label: '年龄' },
+  { prop: 'dept', label: '部门' },
+  { prop: 'gender', label: '性别' }
+];
+const ageDrillData = [
+  { name: '张三', age: 25, dept: '技术部', gender: '男' },
+  { name: '李四', age: 32, dept: '产品部', gender: '女' },
+  { name: '王五', age: 28, dept: '设计部', gender: '男' },
+  { name: '赵六', age: 41, dept: '市场部', gender: '女' }
+];
 </script>
 
 <style scoped>
