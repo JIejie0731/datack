@@ -4,6 +4,8 @@ import App from './App.vue'
 import router from './router'
 import ArcoVue from '@arco-design/web-vue'
 import '@arco-design/web-vue/dist/arco.css'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import '@/assets/global.css'
 
 // 添加 Monaco 环境配置，解决 Web Worker 问题
@@ -17,4 +19,5 @@ window.MonacoEnvironment = {
 const app = createApp(App)
 app.use(router)
 app.use(ArcoVue)
+app.use(ElementPlus) // 关键：引入 Element Plus
 app.mount('#app')

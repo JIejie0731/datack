@@ -8,6 +8,7 @@ import Logistics from '../views/Logistics.vue'
 import HumanResource from '../views/HumanResource.vue'
 import Test from '../views/Test.vue'
 import CombatMap from '../views/CombatMap.vue' // 新增
+import DataManage from '../views/DataManage.vue'
 
 
 const routes = [
@@ -34,7 +35,20 @@ const routes = [
   {
     path: '/livedata',
     name: 'Livedata',
-    component: Livedata
+    component: Livedata,
+    children: [
+      {
+        path: 'manage',
+        name: 'DataManage',
+        component: DataManage
+      },
+      {
+        path: 'mapping',
+        name: 'DatasetTableMap',
+        component: () => import('../views/DatasetTableMap.vue')
+      },
+      // 可继续添加其他子页面
+    ]
   },
   {
     path: '/logistics',

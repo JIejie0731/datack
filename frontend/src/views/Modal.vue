@@ -40,7 +40,7 @@
   </template>
   
   <script setup>
-  import { defineProps, defineEmits, ref, computed, watch } from 'vue'
+  import { ref, computed, watch } from 'vue'
   import { Table as ATable, Pagination as APagination } from '@arco-design/web-vue'
   
   const props = defineProps({
@@ -50,7 +50,6 @@
     data: { type: Array, default: () => [] },
     defaultPageSize: { type: Number, default: 10 }
   })
-  const emit = defineEmits(['update:visible'])
   
   function close() {
     emit('update:visible', false)

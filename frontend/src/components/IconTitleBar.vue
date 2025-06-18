@@ -12,13 +12,8 @@
   </template>
   
   <script setup>
-  import { defineProps } from 'vue'
+  // import { defineProps } from 'vue'
   import imgSrc from '@/assets/运输车辆管理.png'
-  defineProps({
-    width: { type: String, default: '18px' },
-    height: { type: String, default: '18px' },
-    marginRight: { type: String, default: '6px' }
-  })
   </script>
   
   <style scoped>

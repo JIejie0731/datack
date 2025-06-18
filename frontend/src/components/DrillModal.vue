@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { ref, watch, defineProps, defineEmits, computed } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { ElTable, ElTableColumn, ElPagination, ElButton } from 'element-plus'
 import * as XLSX from 'xlsx'
 
@@ -72,11 +72,9 @@ const props = defineProps({
   data: { type: Array, default: () => [] },
   columns: { type: Array, default: () => [] }
 })
-const emit = defineEmits(['update:modelValue', 'close'])
 
 const visible = ref(props.modelValue)
 watch(() => props.modelValue, val => visible.value = val)
-watch(visible, val => emit('update:modelValue', val))
 
 const pageSize = ref(10)
 const currentPage = ref(1)

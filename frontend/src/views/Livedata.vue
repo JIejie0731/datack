@@ -1,11 +1,4 @@
 <template>
-  <a-modal v-model:visible="visible" title="请输入访问密码" :closable="true" :mask-closable="false" @ok="handleOk" @close="handleClose">
-    <a-input-password v-model="password" placeholder="请输入密码" @pressEnter="handleOk" />
-    <template #footer>
-      <a-button @click="handleOk" type="primary">确定</a-button>
-    </template>
-    <div v-if="error" style="color: #f53f3f; margin-top: 8px;">密码错误，请重试。</div>
-  </a-modal>
   <DrillModal v-model="showDrill" title="下钻示例" :data="pagedData">
     <div class="el-table-wrapper">
       <el-table
@@ -47,22 +40,56 @@
     <a-layout class="livedata-layout">
       <a-layout-header class="livedata-header">
         <div class="livedata-logo">数据求索后台</div>
+        <a-button class="nav-icon-btn user-btn" shape="circle" size="small" @click="goHome" style="margin-left: 16px;">
+          <icon-home />
+        </a-button>
+        <a-button class="nav-icon-btn user-btn" shape="circle" size="small" @click="goProfile" style="margin-left: 8px;">
+          <icon-user />
+        </a-button>
       </a-layout-header>
       <a-layout>
-        <a-layout-sider class="livedata-sider" width="200">
-          <a-menu :default-selected-keys="['overview']" :style="{height: '100%', borderRight: 0}">
-            <a-menu-item key="overview">数据总览</a-menu-item>
-            <a-menu-item key="analysis">数据分析</a-menu-item>
-            <a-menu-item key="manage">数据管理</a-menu-item>
+        <a-layout-sider class="livedata-sider" width="200" collapsed-width="56" :collapsed="collapsed" collapsible style="position: relative;">
+          <a-menu
+            :default-selected-keys="['dashboard']"
+            :style="{height: '100%', borderRight: 0}"
+            @menu-item-click="handleMenuClick"
+            :collapsed="collapsed"
+          >
+            <a-menu-item key="dashboard">
+              <icon-bar-chart />
+              <span v-if="!collapsed">数据大屏</span>
+            </a-menu-item>
+            <a-menu-item key="query">
+              <icon-search />
+              <span v-if="!collapsed">数据查询</span>
+            </a-menu-item>
+            <a-menu-item key="manage">
+              <icon-storage />
+              <span v-if="!collapsed">数据管理</span>
+            </a-menu-item>
+            <a-menu-item key="mapping">
+              <icon-link />
+              <span v-if="!collapsed">数据映射</span>
+            </a-menu-item>
+            <a-menu-item key="profile">
+              <icon-user />
+              <span v-if="!collapsed">个人中心</span>
+            </a-menu-item>
           </a-menu>
+          <div style="padding: 12px; text-align: right; position: absolute; bottom: 0; left: 0; width: 100%;  z-index: 10;">
+            <a-button
+              class="sider-toggle-btn"
+              shape="circle"
+              size="small"
+              @click="toggleSider"
+              style="margin-bottom: 8px;"
+            >
+              <component :is="collapsed ? IconMenuUnfold : IconMenuFold" />
+            </a-button>
+          </div>
         </a-layout-sider>
         <a-layout-content class="livedata-content">
-          <div class="livedata-welcome">
-            <h2>欢迎使用数据求索后台管理系统</h2>
-            <p>请选择左侧菜单进行数据操作与分析。</p>
-            <a-button type="primary" @click="showDrill = true">下钻数据演示</a-button>
-          </div>
-          <!-- 这里预留后续功能插槽 -->
+          <router-view />
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -78,15 +105,13 @@ import { useRouter } from 'vue-router'
 import DrillModal from '@/components/DrillModal.vue'
 import { ElTable, ElTableColumn, ElPagination, ElButton } from 'element-plus'
 import * as XLSX from 'xlsx'
+import { IconBarChart, IconSearch, IconStorage, IconLink, IconUser, IconMenuFold, IconMenuUnfold, IconHome } from '@arco-design/web-vue/es/icon'
 
-const visible = ref(true)
-const password = ref('')
-const error = ref(false)
-const authed = ref(false)
 const router = useRouter()
 const showDrill = ref(false)
 const pageSize = ref(10)
 const currentPage = ref(1)
+const collapsed = ref(false)
 
 // 生成25条模拟数据
 const drillData = ref(Array.from({ length: 25 }, (_, i) => ({
@@ -135,24 +160,6 @@ const columns = [
   { prop: 'field15', label: '字段15', minWidth: 100 }
 ]
 
-function handleOk() {
-  if (password.value === '1005') {
-    visible.value = false
-    error.value = false
-    authed.value = true
-  } else {
-    error.value = true
-  }
-}
-
-function handleClose() {
-  password.value = ''
-  error.value = false
-  if (!authed.value) {
-    router.push('/')
-  }
-}
-
 function handlePageChange(val) {
   currentPage.value = val
 }
@@ -175,6 +182,29 @@ function exportExcel() {
   XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
   XLSX.writeFile(wb, '下钻数据.xlsx')
 }
+
+function handleMenuClick(key) {
+  if (key === 'manage') {
+    router.push('/livedata/manage')
+  } else if (key === 'mapping') {
+    router.push('/livedata/mapping')
+  }
+  // 其它菜单项可按需跳转
+}
+
+function toggleSider() {
+  collapsed.value = !collapsed.value
+}
+
+function goHome() {
+  router.push('/')
+}
+
+function goProfile() {
+  router.push('/profile')
+}
+
+const authed = ref(true) // 直接允许访问，无需密码
 </script>
 
 <style scoped>
@@ -182,22 +212,27 @@ function exportExcel() {
   min-height: 100vh;
 }
 .livedata-header {
-  background: #232b3a;
-  color: #00eaff;
+  background: #fff;
+  color: #232b3a;
   font-size: 1.3rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   padding-left: 32px;
   height: 56px;
+  box-shadow: 0 2px 8px #0001;
+  border-top: 0.8px solid #e0e0e0;
+  border-bottom: 0.8px solid #e0e0e0;
+  position: relative;
 }
 .livedata-logo {
   font-size: 1.25rem;
   letter-spacing: 2px;
-  color: #00eaff;
+  color: #232b3a;
+  display: inline-block;
 }
 .livedata-sider {
-  background: #1a2233;
+
   color: #fff;
 }
 .livedata-content {
@@ -256,5 +291,51 @@ function exportExcel() {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+}
+.livedata-sider .arco-btn[type="button"] {
+  background: #1a2233 !important;
+  border: none !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.livedata-sider .arco-btn[type="button"]:hover,
+.livedata-sider .arco-btn[type="button"]:active {
+  background: #1a2233 !important;
+  color: #4e7fff !important;
+}
+.sider-toggle-btn {
+  border: none !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.sider-toggle-btn:hover,
+.sider-toggle-btn:active,
+.sider-toggle-btn:focus {
+  background: #1a2233 !important;
+  color: #4e7fff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.nav-icon-btn {
+  background: #f4f8ff !important;
+  border: none !important;
+  color: #232b3a !important;
+  box-shadow: none !important;
+  outline: none !important;
+  vertical-align: middle;
+}
+.nav-icon-btn:hover {
+  background: #e6f0ff !important;
+  color: #4e7fff !important;
+}
+.user-btn {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.user-btn + .user-btn {
+  right: 80px;
 }
 </style> 
