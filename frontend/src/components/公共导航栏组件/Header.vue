@@ -68,13 +68,13 @@
 import { ref, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { IconHome, IconFolderDelete, IconDesktop, IconBarChart, IconPalette, IconMoon, IconSun } from '@arco-design/web-vue/es/icon';
-import homeIcon from '../assets/主页.png'
-import projectIcon from '../assets/作品集.png'
-import dataIcon from '../assets/大数据系统.png'
-import dbIcon from '../assets/服务器_数据库_jurassic.png'
-import blogIcon from '../assets/博客.png'
-import testIcon from '../assets/测试.png'
-import toolboxIcon from '../assets/工具箱.png'
+import homeIcon from '@/assets/主页.png'
+import projectIcon from '@/assets/作品集.png'
+import dataIcon from '@/assets/大数据系统.png'
+import dbIcon from '@/assets/服务器_数据库_jurassic.png'
+import blogIcon from '@/assets/博客.png'
+import testIcon from '@/assets/测试.png'
+import toolboxIcon from '@/assets/工具箱.png'
 
 const router = useRouter()
 const route = useRoute()
@@ -102,9 +102,16 @@ function handleNavRightClick(idx) {
   if (idx === 0) router.push('/toolbox')
   else if (idx === 1) router.push('/blog')
   else if (idx === 2) {
-    // 数据求索：先跳转再弹窗
-    showPasswordModalOnRoute.value = true
-    router.push('/livedata')
+    // 数据求索：检查登录状态
+    const token = localStorage.getItem('token')
+    if (token) {
+      // 已登录，直接跳转到数据大屏
+      router.push('/livedata/main/dashboard')
+    } else {
+      // 未登录，显示密码弹窗并跳转到登录页
+      showPasswordModalOnRoute.value = true
+      router.push('/livedata')
+    }
   }
   else if (idx === 3) router.push('/database')
   else if (idx === 4) router.push('/test')

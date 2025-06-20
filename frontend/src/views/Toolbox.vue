@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import Header from '../components/Header.vue'
+import Header from '../components/公共导航栏组件/Header.vue'
 </script>
 
 <style scoped>

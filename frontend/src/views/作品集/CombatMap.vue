@@ -1,6 +1,6 @@
 <template>
   <div class="nav-bar">
-    导航栏
+    <Header />
     <div class="district-btns">
       <button class="district-btn" @click="resetView">深圳视角</button>
       <button v-for="district in districtList" :key="district" class="district-btn" @click="() => focusDistrict(district)">{{ district }}</button>
@@ -21,6 +21,9 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import Header from '../../components/公共导航栏组件/Header.vue'
+import BaseCard from '../../components/卡片组件/BaseCard.vue'
+import DrillModal from '../../components/下钻组件/DrillModal.vue'
 
 let map = null
 const SZ_CENTER = [114.113322, 22.648867]

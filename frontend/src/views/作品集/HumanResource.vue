@@ -1,5 +1,7 @@
 <template>
-  <div class="test-dashboard-bg">
+  
+
+    <div class="test-dashboard-bg">
       <div class="hr-section section-1 nav-bar-fixed">
           <div class="nav-bar-flex">
               <div class="logo-title-group shrinkable">
@@ -42,7 +44,10 @@
               </div>
           </div>
       </div>
-    <div class="main-content">
+
+
+    
+      <div class="main-content">
       <div class="content-area area-a">
         <div class="mini-card-list">
           <div v-for="(item, index) in 4" :key="index" class="mini-card card1-flex">
@@ -226,10 +231,10 @@ import { useRouter } from 'vue-router';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as echarts from 'echarts';
-import BaseCard from '../components/BaseCard.vue';
+import BaseCard from '../../components/卡片组件/BaseCard.vue';
 import { ElTable, ElTableColumn } from 'element-plus';
 import 'element-plus/dist/index.css';
-import DrillModal from '../components/DrillModal.vue';
+import DrillModal from '../../components/下钻组件/DrillModal.vue'
 
 const router = useRouter();
 

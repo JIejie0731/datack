@@ -32,7 +32,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
-import BaseCard from '@/components/BaseCard.vue'
+import BaseCard from '@/components/卡片组件/BaseCard.vue'
 import VChart from 'vue-echarts'
 
 const deptOptions = ref([])

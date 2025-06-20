@@ -44,7 +44,7 @@
 
 <script setup>
 // 引入 Header 组件
-import Header from '../components/Header.vue'
+import Header from '../components/公共导航栏组件/Header.vue'
 
 // 引入 useRouter
 import { useRouter } from 'vue-router'

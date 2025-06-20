@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import Header from '../components/Header.vue'
+import Header from '../components/公共导航栏组件/Header.vue'
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import axios from 'axios'
 import { Message } from '@arco-design/web-vue'

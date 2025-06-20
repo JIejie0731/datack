@@ -17,7 +17,7 @@
       <div class="home-desc" style="text-align: left;">
         <ul style=" margin: 0;">
           <li>精通SQL语法，熟练使用Mysql，GaussDB，PostgreSQL各类数据库</li>
-          <li>精通Python，熟练使用Numpy、Pandas对数据进行分析处理，并用Pyecharts创建图表</li>
+          <li>精通Python，熟练使用Numpy,Pandas对数据进行分析处理，并用Pyecharts创建图表</li>
           <li>熟练使用Excel，Tableau，帆软BI，Echarts.js制作各种可视化图表及仪表盘制作</li>
           <li>构建AI扣子工作流赋能业务分析，减少手工操作作业，提升分析效率</li>
           <li>掌握多种分析方法和模型，AB测试，同期群分析，描述性分析，拆解分析，漏斗转化，SWOT，AARRR，AIPL模型</li>
@@ -105,7 +105,7 @@
 
 
 <script setup>
-import Header from '../components/Header.vue'
+import Header from '../components/公共导航栏组件/Header.vue'
 import icon1 from '../assets/帆软BI-copy.png'
 import icon2 from '../assets/剪映.png'
 import icon3 from '../assets/css.png'

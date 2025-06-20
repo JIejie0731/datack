@@ -27,28 +27,28 @@
       <div class="content-area">
         <div class="project-card-list">
           <div class="project-card" @click="goLogistics">
-            <div class="project-background"></div>
+            <div class="project-background logistics-background" :style="{ backgroundImage: `url(${logisticsCoverImg})` }"></div>
             <div class="project-info">
               <div class="project-title">物流中心运营监控大屏</div>
               <div class="project-desc">物流中心视角下的仓库态势监控大屏</div>
             </div>
           </div>
           <div class="project-card" @click="goHumanResource">
-            <div class="project-background hr-background"></div>
+            <div class="project-background hr-background" :style="{ backgroundImage: `url(${hrCoverImg})` }"></div>
             <div class="project-info">
               <div class="project-title">人力资源分析大屏</div>
               <div class="project-desc">统筹人力资源分全流程分析</div>
             </div>
           </div>
           <div class="project-card" @click="goGmv">
-            <div class="project-background milktea-background"></div>
+            <div class="project-background milktea-background" :style="{ backgroundImage: `url(${milkteaCoverImg})` }"></div>
             <div class="project-info">
               <div class="project-title">深圳X奶茶店运营大屏</div>
               <div class="project-desc">深圳X奶茶店运营数据可视化大屏</div>
             </div>
           </div>
           <div class="project-card" @click="goAdvertising">
-            <div class="project-background building-background"></div>
+            <div class="project-background building-background" :style="{ backgroundImage: `url(${buildingCoverImg})` }"></div>
             <div class="project-info">
               <div class="project-title">3D楼宇数字可视化</div>
               <div class="project-desc">3D楼宇数字孪生与可视化大屏</div>
@@ -61,8 +61,9 @@
   
   <script setup>
   // 引入 Header 组件
-  import Header from '../components/Header.vue'
-  import BaseCard from '../components/BaseCard.vue'
+  import Header from '../../components/公共导航栏组件/Header.vue'
+  import BaseCard from '../../components/卡片组件/BaseCard.vue'
+  import DrillModal from '../../components/下钻组件/DrillModal.vue'
   
   // 引入 useRouter
   import { useRouter } from 'vue-router'
@@ -74,7 +75,10 @@
   }
   
   // 引入人力资源封面图片
-  import hrCoverImg from '../assets/hr封面.png'
+  import hrCoverImg from '@/assets/hr封面.png'
+  import logisticsCoverImg from '@/assets/物流封面.png'
+  import milkteaCoverImg from '@/assets/开发中黑色封面.jpg'
+  import buildingCoverImg from '@/assets/开发中红色封面.jpg'
   
   // 处理项目卡片点击事件
   function goLogistics() {
@@ -94,11 +98,21 @@
   // 这里可以添加测试用的逻辑
   
   // 自动重置全局样式，防止页面整体缩放异常
-  import { onMounted } from 'vue'
+  import { onMounted, onUnmounted } from 'vue'
   onMounted(() => {
     document.documentElement.style.fontSize = '16px';
     document.body.style.transform = 'none';
     document.body.style.zoom = '1';
+    document.body.style.width = 'auto';
+    document.body.style.maxWidth = 'none';
+  })
+
+  onUnmounted(() => {
+    document.documentElement.style.fontSize = '16px';
+    document.body.style.transform = 'none';
+    document.body.style.zoom = '1';
+    document.body.style.width = 'auto';
+    document.body.style.maxWidth = 'none';
   })
   </script>
   
@@ -284,23 +298,19 @@
   .project-background {
     width: 100%;
     height: 14.375rem; /* 230px 转换为 rem */
-    background-image: url('../assets/物流封面.png'); /* 设置背景图片 */
     background-size: cover;
     background-position: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   }
   .hr-background {
-    background-image: url('../assets/hr封面.png');
     background-size: cover;
     background-position: center;
   }
   .milktea-background {
-    background-image: url('../assets/开发中黑色封面.jpg');
     background-size: cover;
     background-position: center;
   }
   .building-background {
-    background-image: url('../assets/开发中红色封面.jpg');
     background-size: cover;
     background-position: center;
   }

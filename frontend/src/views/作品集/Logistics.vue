@@ -26,7 +26,7 @@
           </div>
           <div class="card-a2">
             <div class="a2-title-row">
-              <IconTitleBar />
+       
               仓储业务运营监控
             </div>
             <div class="a2-metrics-title-row">
@@ -92,7 +92,7 @@
       <div class="section section2">
         <div class="card-c"><div class="card-c1">
           <div class="c1-title-row">
-            <IconTitleBar />
+       
             仓储库存监控
           </div>
           <div class="c1-metrics-row">
@@ -127,7 +127,7 @@
         </div></div>
         <div class="card-d"><div class="card-d1">
           <div class="d1-title-row">
-            <IconTitleBar />
+        
             物流园区视频监控
           </div>
           <div class="d1-metrics-table">
@@ -163,7 +163,7 @@
         </div></div>
         <div class="card-e"><div class="card-e1">
           <div class="e1-title-row">
-            <IconTitleBar />
+     
             自动化立库运营监控
           </div>
           <div class="e1-table-box" ref="e1TableBox">
@@ -187,12 +187,13 @@
   import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
   import { useRouter } from 'vue-router'
   import bgImg from '@/assets/背景图.png'
-  import IconTitleBar from '@/components/IconTitleBar.vue'
+ 
   import { use } from 'echarts/core'
   import VChart from 'vue-echarts'
   import { BarChart } from 'echarts/charts'
   import { GridComponent, TooltipComponent, TitleComponent } from 'echarts/components'
   import { CanvasRenderer } from 'echarts/renderers'
+
   
   
   use([BarChart, GridComponent, TooltipComponent, TitleComponent, CanvasRenderer])
